@@ -7,9 +7,8 @@
     <title>Interessi Privati</title>
     <!-- Add twitter and og meta here -->
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600,700|Barlow+Semi+Condensed:400,700|Roboto:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/interessiPrivati.css">
 </head>
 <body>
@@ -26,14 +25,6 @@
                   <h1>Integrity Watch Italia - Interessi Privati</h1>
                   <p>Lorem ipsum sit dolor amet adipiscit elur.</p> 
                   <i class="material-icons close-btn" @click="showInfo = false">close</i>
-                </div>
-              </div>
-              <!-- SHARE -->
-              <div class="col-md-4 chart-col" v-if="showShare">
-                <div class="boxed-container share-container">
-                  <button class="twitter-btn" @click="share('twitter')">Share on Twitter</button>
-                  <button class="facebook-btn" @click="share('facebook')">Share on Facebook</button>
-                  <i class="material-icons close-btn" @click="showShare = false">close</i>
                 </div>
               </div>
             </div>
@@ -157,13 +148,7 @@
       <!-- Bottom bar -->
       <div class="container-fluid footer-bar">
         <div class="row">
-          <div class="footer-col col-8 col-sm-4">
-            <div class="footer-input">
-              <input type="text" id="search-input" placeholder="Filtra">
-              <i class="material-icons">search</i>
-            </div>
-          </div>
-          <div class="footer-col col-4 col-sm-8 footer-counts">
+          <div class="footer-col col-12 col-sm-12 footer-counts">
             <div class="count-box count-box-legislatori">
               <div class="filter-count lgnb">0</div> su <strong class="total-count">0</strong> LEGISLATORI
             </div>
@@ -173,10 +158,19 @@
             <div class="count-box count-box-aziende">
               <div class="filter-count aznb">0</div> su <strong class="total-count">0</strong> AZIENDE
             </div>
+            <div class="footer-input">
+              <input type="text" id="search-input" placeholder="Filtra">
+              <i class="material-icons">search</i>
+            </div>
           </div>
         </div>
         <!-- Reset filters -->
-        <button class="reset-btn"><i class="material-icons">settings_backup_restore</i><span class="reset-btn-text">Reset filters</span></button>
+        <button class="reset-btn"><i class="material-icons">settings_backup_restore</i><span class="reset-btn-text"></span></button>
+        <div class="footer-buttons-right">
+          <button><i class="material-icons">cloud_download</i></button>
+          <button class="btn-twitter" @click="share('twitter')"><img src="./images/twitter.png" /></button>
+          <button class="btn-fb" @click="share('facebook')"><img src="./images/facebook.png" /></button>
+        </div>
       </div>
       <!-- Loader -->
       <loader v-if="loader" :text="'Caricamento ...'" />

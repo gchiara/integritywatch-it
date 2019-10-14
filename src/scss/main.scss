@@ -1,6 +1,7 @@
 /* VARS */
-$color_TI: #3b95d0;
-$color_TI_darker: darken( $color_TI, 20% );
+//$color_TI: #3b95d0;
+$color_TI: #002c3d;
+$color_TI_darker: #002c3d;
 $color_lobby: #42b983;
 
 /* HEADER */
@@ -8,15 +9,18 @@ $color_lobby: #42b983;
 #iw-nav {
   padding: 10px 25px;
   .navbar-brand {
+    padding: 0;
+    padding-right: 20px;
     img {
-      height: 40px;
+      height: 60px;
     }
   }
   a {
     font-weight: bold;
     color: $color_TI;
+    transition: all .4s;
     &.active, &:hover {
-      color: $color_TI_darker;
+      color: #00a7e1;
     }
   }
   .icon-btn {
@@ -58,17 +62,20 @@ $color_lobby: #42b983;
   overflow: hidden;
 }
 .description-container {
-  background: darken($color_TI, 10%);
+  background: #00a7e1;
   color: #fff;
   text-align: left;
   padding: 30px 70px 20px 20px;
   position: relative;
   h1 {
-    font-size: 30px;
+    font-size: 40px;
     margin-bottom: 20px;
+    text-transform: uppercase;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
   }
   a {
-    color: darken($color_TI, 30%);
+    color: $color_TI;
     font-weight: 600;
   }
   .close-btn {
@@ -124,7 +131,7 @@ $color_lobby: #42b983;
   }
 }
 .subrow-title-container {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   padding-left: 10px;
   padding-right: 10px;
   text-align: left;
@@ -134,15 +141,17 @@ $color_lobby: #42b983;
   .subrow-title {
     display: inline-block;
     text-align: left;
-    color: #456c8d;
+    color: #00a7e1;
     border-radius: 2px;
-    font-size: 24px;
+    text-transform: uppercase;
+    font-family: 'Barlow Condensed', sans-serif;
     font-weight: 600;
+    font-size: 40px;
     width: auto;
     padding: 15px 0px;
     &.subrow-title-right {
       text-align: right;
-      color: $color_lobby;
+      color: #19d3c5;
     }
   }
 }
@@ -193,7 +202,7 @@ $color_lobby: #42b983;
 /* FOOTER BAR */ 
 
 .footer-bar {
-  background: rgba(darken($color_TI, 10%),0.98);
+  background: rgba($color_TI,0.98);
   position: fixed;
   bottom: 0;
   left: 0;
@@ -204,13 +213,22 @@ $color_lobby: #42b983;
     height: 80px;
   }
   .footer-input {
-    position: absolute;
+    //position: absolute;
+    //top: 50%;
+    //left: 25px;
+    //width: 80%;
+    //-webkit-transform: translateY(-50%);
+    //  -ms-transform: translateY(-50%);
+    //      transform: translateY(-50%);
+    position: relative;
+    background: rgba(255, 255, 255, 0.2);
     top: 50%;
-    left: 25px;
-    width: 80%;
+    width: 250px;
     -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
+    float: left;
+    margin-left: 10px;
     i {
       vertical-align: middle;
       position: absolute;
@@ -248,9 +266,9 @@ $color_lobby: #42b983;
       display: none;
     }
     .count-box {
-      margin: 0 5px 0 0;
-      background: rgba(255,255,255,0.1);
-      padding: 10px 10px;
+      margin: 0 0 0 10px;
+      //background: rgba(255,255,255,0.1);
+      padding: 15px 10px 10px 10px;
       height: 100%;
       width: 150px;
       font-size: 14px;
@@ -261,8 +279,14 @@ $color_lobby: #42b983;
           display: none;
         }
       }
+      &.count-box-donazioni {
+        width: 155px;
+      }
+      &.count-box-importo {
+        width: 190px;
+      }
       .filter-count {
-        color: $color_TI_darker;
+        color: #00a7e1;
         font-size: 26px;
         font-weight: 600;
         display:block;
@@ -275,20 +299,20 @@ $color_lobby: #42b983;
   }
   .reset-btn {
     position: absolute;
-    right: 25px;
+    right: 200px;
     top: 50%;
     -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
     border: none;
-    border-radius: 2px;
+    border-radius: 10px;
     color: #fff;
     padding: 15px 20px;
     cursor: pointer;
-    background: rgb(226, 94, 108);
+    background: #ff595a;
     transition: all .4s;
     &:hover, &:focus, &.active {
-      background: rgb(206, 74, 88);
+      background: #ef494a;
       outline: none;
     }
     .reset-btn-text {
@@ -298,9 +322,43 @@ $color_lobby: #42b983;
     }
     i {
       vertical-align: middle;
-      margin-right: 10px;
+      margin-right: 0px;
       @media only screen and (max-width: 767px) {
         margin-right: 0;
+      }
+    }
+  }
+  .footer-buttons-right {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+    button {
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      vertical-align: middle;
+      i {
+        font-size: 35px;
+        vertical-align: middle;
+      }
+      img {
+        height: 25px;
+        vertical-align: middle;
+      }
+      &.btn-twitter {
+        img {
+
+        }
+      }
+      &.btn-fb {
+        img {
+          height: 29px;
+        }
       }
     }
   }
@@ -343,18 +401,20 @@ $color_lobby: #42b983;
     display: inline-block;
     color: #fff;
     border-radius: 2px;
-    font-size: 18px;
+    font-size: 24px;
     width: auto;
     padding: 15px 20px;
     width: 100%;
     margin-bottom: 10px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 600;
     &.details-title-left {
       text-align: center;
-      background: #456c8d;
+      background: #00a7e1;
     }
     &.details-title-right {
       text-align: center;
-      background: $color_lobby;
+      background: #19d3c5;
     }
   }
   .details-left {
@@ -406,7 +466,8 @@ $color_lobby: #42b983;
   color: #2c3e50;
   background: #e0e2e6;;
   min-height: 100vh;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  //font-family: 'Roboto', sans-serif;
 }
 .dc-chart g.row text {
   fill: #000;
@@ -422,9 +483,9 @@ $color_lobby: #42b983;
     overflow: visible;
 }
 .dc-chart g.row text {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  fill: #333;
+  fill: #111;
   font-size: 13px;
 }
 .dc-legend .dc-legend-item {
@@ -634,7 +695,9 @@ table.dataTable tbody tr:hover {
   }
   .modal-title {
     font-weight: 600;
-    color: #2e7db0;
+    color: #002c3d;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 30px;
   }
   .details-line {
     text-align: left;

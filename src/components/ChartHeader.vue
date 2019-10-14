@@ -22,16 +22,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$color_TI: #3b95d0;
-$color_TI_darker: darken( $color_TI, 20% );
+$color_TI: #205d85;
 .chart-header {
   padding: 10px 5px;
   margin: 0;
   background: #fafafa;
   .chart-title {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 600;
     font-size: 20px;
     text-align: left;
-    color: $color_TI_darker;
+    color: $color_TI;
     @media only screen and (max-width: 1400px) {
       font-size: 18px;
     }

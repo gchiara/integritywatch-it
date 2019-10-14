@@ -25,7 +25,7 @@ import ChartHeader from './components/ChartHeader.vue';
 // Data object - is also used by Vue
 
 var vuedata = {
-  page: 'tabA',
+  page: 'tabC',
   loader: true,
   showInfo: true,
   showShare: true,
@@ -77,24 +77,51 @@ var vuedata = {
       "Cabinet Members": "#3b95d0"
     },
     generic: ["#3b95d0", "#4081ae", "#406a95", "#395a75" ],
-    parties: {
-      "VVD": "#f68f1e",
-      "PVV": "#153360",
-      "CDA": "#009c48",
-      "D66": "#3db54a",
-      "GL": "#8cbe57",
-      "SP": "#ee2e22",
-      "PvdA": "#bb1018",
-      "CU": "#00aeef",
-      "PvdD": "#006535",
-      "50PLUS": "#90268f",
-      "SGP": "#f36421",
-      "DENK": "#35bfc1",
-      "FvD": "#933939",
-      "vKA": "#aaa",
-      "Onafhankelijk": "#c0c0c0"
+    ricevente: {
+      "party": "#00a7e1",
+      "person": "#0e8fc0",
+      "committee": "#0d769c",
+      "association": "#065a77",
+      "parliament group": "#014962",
+      "party list": "#013952"
     },
-    default: "#395a75"
+    donatori: {
+      "person": "#19d3c5",
+      "company/professional": "#16baad",
+      "association/foundation": "#13a195",
+      "party/political movement": "#039185",
+      "local party/political movement": "#90ece4",
+      "parliament group": "#44dfd2"
+    },
+    //"#90ece4", "#44dfd2", "#19d3c5", "#16baad", "#13a195"
+    parties: {
+      "Union Valdôtaine": "#59A2C3",
+      "10 Volte Meglio": "#FF5732",
+      "Articolo 1 - MDP": "#ED1C24",
+      "Centristi per l'Europa": "#0081B8",
+      "Civica Popolare": "#E00568",
+      "Forza Italia": "#0C5D9D",
+      "Fratelli d'Italia": "#074773",
+      "Indipendente": "#A9A9A9",
+      "Italia in Comune": "#008839",
+      "Italia Viva": "#CC3C84",
+      "Lega": "#0030AA",
+      "Liberi e Uguali": "#ED1C24",
+      "Movimento 5 Stelle": "#FBC02D",
+      "Movimento Associativo Italiani all'Estero": "#212795",
+      "Nessuna componente politica di riferimento": "#ccc",
+      "Noi con l'Italia": "#236186",
+      "Partito Autonomista Trentino Tirolese": "#131019",
+      "Partito Democratico": "#2A963A",
+      "Partito Socialista Italiano": "#D3031D",
+      "Più Europa": "#30327F",
+      "Sinistra Italiana": "#EF403D",
+      "Südtiroler Volkspartei": "#231F20",
+      "Unione Sudamericana Emigrati Italiani": "#E7E882",
+      "-": "#ccc"
+    },
+    default: "#00a7e1",
+    default2: "#19d3c5"
   }
 }
 
@@ -364,6 +391,9 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
             return thisKey + ': ' + d.value;
           })
           .dimension(dimension)
+          .colorCalculator(function(d, i) {
+            return vuedata.colors.ricevente[d.key];
+          })
           .group(group);
           /*
           .ordering(function(d) { return order.indexOf(d)})
@@ -400,6 +430,9 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
           .margins({top: 0, left: 0, right: 0, bottom: 20})
           .group(filteredGroup)
           .dimension(dimension)
+          .colorCalculator(function(d, i) {
+            return vuedata.colors.default;
+          })
           /*
           .colorCalculator(function(d, i) {
             var level = getPolicyLevel(d.key);
@@ -422,6 +455,13 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
 
       //CHART 3
       var createTopDonatoriChart = function() {
+        function getDonorType(donor) {
+          var don = _.find(donazioni, function (x) { return x.donorFullName == donor });
+          if(don) {
+            return don.donor_type;
+          }
+          return ""; 
+        }
         var chart = charts.topDonatori.chart;
         var dimension = ndx.dimension(function (d) {
           return d.donorFullName;
@@ -446,12 +486,10 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
           .margins({top: 0, left: 0, right: 0, bottom: 20})
           .group(filteredGroup)
           .dimension(dimension)
-          /*
           .colorCalculator(function(d, i) {
-            var level = getPolicyLevel(d.key);
-            return vuedata.colors.ecPolicy[level];
+            var type = getDonorType(d.key);
+            return vuedata.colors.donatori[type];
           })
-          */
           .label(function (d) {
               if(d.key && d.key.length > charsLength){
                 return d.key.substring(0,charsLength) + '...';
@@ -492,11 +530,16 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
             return thisKey + ': ' + d.value;
           })
           .dimension(dimension)
+          .colorCalculator(function(d, i) {
+            return vuedata.colors.donatori[d.key];
+          })
           .group(group);
           /*
           .ordering(function(d) { return order.indexOf(d)})
           .colorCalculator(function(d, i) {
-            return vuedata.colors.parties[d.key];
+            return vuedata.colors.donatori[d.key];
+            //var level = getPolicyLevel(d.key);
+            //return vuedata.colors.ecPolicy[level];
           });
           */
         chart.render();
@@ -528,12 +571,12 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
           .margins({top: 0, left: 0, right: 0, bottom: 20})
           .group(filteredGroup)
           .dimension(dimension)
-          /*
           .colorCalculator(function(d, i) {
-            var level = getPolicyLevel(d.key);
-            return vuedata.colors.ecPolicy[level];
+            if(vuedata.colors.parties[d.key]){
+              return vuedata.colors.parties[d.key];
+            }
+            return "#ccc";
           })
-          */
           .label(function (d) {
               if(d.key && d.key.length > charsLength){
                 return d.key.substring(0,charsLength) + '...';
@@ -575,12 +618,9 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
           .margins({top: 0, left: 0, right: 0, bottom: 20})
           .group(filteredGroup)
           .dimension(dimension)
-          /*
           .colorCalculator(function(d, i) {
-            var level = getPolicyLevel(d.key);
-            return vuedata.colors.ecPolicy[level];
+            return vuedata.colors.default2;
           })
-          */
           .label(function (d) {
               if(d.key && d.key.length > charsLength){
                 return d.key.substring(0,charsLength) + '...';
@@ -811,7 +851,7 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
           },
           function(p,d) {  
             p.nb -=1;
-            if (!d.Id) {
+            if (!d.donor_last_name_01) {
               return p;
             }
             p.amount -= +d.amountNum;

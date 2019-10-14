@@ -7,13 +7,12 @@
     <title>Interessi Privati</title>
     <!-- Add twitter and og meta here -->
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600,700|Barlow+Semi+Condensed:400,700|Roboto:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/donazioni.css">
 </head>
 <body>
-    <div id="app" class="tabA">   
+    <div id="app" class="tabC">   
       <?php include 'header.php' ?>
       <div class="container-fluid dashboard-container-outer">
         <div class="row dashboard-container">
@@ -26,14 +25,6 @@
                   <h1>Integrity Watch Italia - Finaziamento politico</h1>
                   <p>Lorem ipsum sit dolor amet adipiscit elur.</p> 
                   <i class="material-icons close-btn" @click="showInfo = false">close</i>
-                </div>
-              </div>
-              <!-- SHARE -->
-              <div class="col-md-4 chart-col" v-if="showShare">
-                <div class="boxed-container share-container">
-                  <button class="twitter-btn" @click="share('twitter')">Share on Twitter</button>
-                  <button class="facebook-btn" @click="share('facebook')">Share on Facebook</button>
-                  <i class="material-icons close-btn" @click="showShare = false">close</i>
                 </div>
               </div>
             </div>
@@ -121,7 +112,8 @@
             <!-- Modal Header -->
             <div class="modal-header">
               <div class="modal-title">
-                <div class="">{{ selectedElement.donation_year }}</div><div class="">{{ selectedElement.donation_amount }}</div>
+                <div class="">Anno: {{ selectedElement.donation_year }}</div>
+                <div class="">Importo: {{ selectedElement.donation_amount }}</div>
               </div>
               <button type="button" class="close" data-dismiss="modal"><i class="material-icons">close</i></button>
             </div>
@@ -156,29 +148,32 @@
       <!-- Bottom bar -->
       <div class="container-fluid footer-bar">
         <div class="row">
-          <div class="footer-col col-8 col-sm-4">
-            <div class="footer-input">
-              <input type="text" id="search-input" placeholder="Filtra">
-              <i class="material-icons">search</i>
-            </div>
-          </div>
-          <div class="footer-col col-4 col-sm-8 footer-counts">
+          <div class="footer-col col-12 col-sm-12 footer-counts">
             <div class="count-box count-box-recipients">
               <div class="filter-count lgnb">0</div> su <strong class="total-count">0</strong> RICEVENTI
             </div>
-            <div class="dc-data-count count-box">
+            <div class="dc-data-count count-box count-box-donazioni">
               <div class="filter-count">0</div>su <strong class="total-count">0</strong> DONAZIONI
             </div>
             <div class="count-box count-box-donors">
               <div class="filter-count aznb">0</div> su <strong class="total-count">0</strong> DONATORI
             </div>
-            <div class="count-box count-box-amount">
+            <div class="count-box count-box-amount count-box-importo">
               <div class="filter-count amountnb">0</div> su <strong class="total-count">0</strong> IMPORTO
+            </div>
+            <div class="footer-input">
+              <input type="text" id="search-input" placeholder="Filtra">
+              <i class="material-icons">search</i>
             </div>
           </div>
         </div>
         <!-- Reset filters -->
-        <button class="reset-btn"><i class="material-icons">settings_backup_restore</i><span class="reset-btn-text">Reset filters</span></button>
+        <button class="reset-btn"><i class="material-icons">settings_backup_restore</i><span class="reset-btn-text"></span></button>
+        <div class="footer-buttons-right">
+          <button><i class="material-icons">cloud_download</i></button>
+          <button class="btn-twitter" @click="share('twitter')"><img src="./images/twitter.png" /></button>
+          <button class="btn-fb" @click="share('facebook')"><img src="./images/facebook.png" /></button>
+        </div>
       </div>
       <!-- Loader -->
       <loader v-if="loader" :text="'Caricamento ...'" />

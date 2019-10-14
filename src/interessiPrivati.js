@@ -25,7 +25,7 @@ import ChartHeader from './components/ChartHeader.vue';
 // Data object - is also used by Vue
 
 var vuedata = {
-  page: 'tabA',
+  page: 'tabB',
   loader: true,
   showInfo: true,
   showShare: true,
@@ -73,23 +73,41 @@ var vuedata = {
       "Cabinet Members": "#3b95d0"
     },
     generic: ["#3b95d0", "#4081ae", "#406a95", "#395a75" ],
+    istituzioni: {
+      "Camera dei Deputati": "#00a7e1",
+      "Senato della Repubblica": "#0e8fc0",
+      "Presidenza del Consiglio dei ministri": "#0d769c",
+      "Ministero degli affari esteri e della cooperazione internazionale": "#065a77",
+      "Ministero delle infrastrutture e dei trasporti": "#014962"
+    },
     parties: {
-      "VVD": "#f68f1e",
-      "PVV": "#153360",
-      "CDA": "#009c48",
-      "D66": "#3db54a",
-      "GL": "#8cbe57",
-      "SP": "#ee2e22",
-      "PvdA": "#bb1018",
-      "CU": "#00aeef",
-      "PvdD": "#006535",
-      "50PLUS": "#90268f",
-      "SGP": "#f36421",
-      "DENK": "#35bfc1",
-      "FvD": "#933939",
-      "vKA": "#aaa",
-      "Onafhankelijk": "#c0c0c0"
-    }
+      "Union Valdôtaine": "#59A2C3",
+      "10 Volte Meglio": "#FF5732",
+      "Articolo 1 - MDP": "#ED1C24",
+      "Centristi per l'Europa": "#0081B8",
+      "Civica Popolare": "#E00568",
+      "Forza Italia": "#0C5D9D",
+      "Fratelli d'Italia": "#074773",
+      "Indipendente": "#A9A9A9",
+      "Italia in Comune": "#008839",
+      "Italia Viva": "#CC3C84",
+      "Lega": "#0030AA",
+      "Liberi e Uguali": "#ED1C24",
+      "Movimento 5 Stelle": "#FBC02D",
+      "Movimento Associativo Italiani all'Estero": "#212795",
+      "Nessuna componente politica di riferimento": "#ccc",
+      "Noi con l'Italia": "#236186",
+      "Partito Autonomista Trentino Tirolese": "#131019",
+      "Partito Democratico": "#2A963A",
+      "Partito Socialista Italiano": "#D3031D",
+      "Più Europa": "#30327F",
+      "Sinistra Italiana": "#EF403D",
+      "Südtiroler Volkspartei": "#231F20",
+      "Unione Sudamericana Emigrati Italiani": "#E7E882",
+      "-": "#ccc"
+    },
+    default: "#00a7e1",
+    default2: "#19d3c5"
   }
 }
 
@@ -333,6 +351,9 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
               return thisKey + ': ' + d.value;
             })
             .dimension(dimension)
+            .colorCalculator(function(d, i) {
+              return vuedata.colors.istituzioni[d.key];
+            })
             .group(group);
             /*
             .ordering(function(d) { return order.indexOf(d)})
@@ -369,12 +390,9 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
             .margins({top: 0, left: 0, right: 0, bottom: 20})
             .group(filteredGroup)
             .dimension(dimension)
-            /*
             .colorCalculator(function(d, i) {
-              var level = getPolicyLevel(d.key);
-              return vuedata.colors.ecPolicy[level];
+              return vuedata.colors.parties[d.key];
             })
-            */
             .label(function (d) {
                 if(d.key && d.key.length > charsLength){
                   return d.key.substring(0,charsLength) + '...';
@@ -415,12 +433,9 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
             .margins({top: 0, left: 0, right: 0, bottom: 20})
             .group(filteredGroup)
             .dimension(dimension)
-            /*
             .colorCalculator(function(d, i) {
-              var level = getPolicyLevel(d.key);
-              return vuedata.colors.ecPolicy[level];
+              return vuedata.colors.default2;
             })
-            */
             .label(function (d) {
                 if(d.key && d.key.length > charsLength){
                   return d.key.substring(0,charsLength) + '...';
@@ -460,6 +475,7 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
               var thisKey = d.key;
               return thisKey + ': ' + d.value;
             })
+            .colors(d3.scaleOrdinal().range(["#90ece4", "#44dfd2", "#19d3c5", "#16baad", "#13a195"]))
             .dimension(dimension)
             .group(group);
             /*
@@ -497,12 +513,9 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
             .margins({top: 0, left: 0, right: 0, bottom: 20})
             .group(filteredGroup)
             .dimension(dimension)
-            /*
             .colorCalculator(function(d, i) {
-              var level = getPolicyLevel(d.key);
-              return vuedata.colors.ecPolicy[level];
+              return vuedata.colors.default;
             })
-            */
             .label(function (d) {
                 if(d.key && d.key.length > charsLength){
                   return d.key.substring(0,charsLength) + '...';
@@ -540,8 +553,9 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
               .dimension(mapDimension)
               .group(group)
               .projection(projection)
-              .colors(d3.scaleQuantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
-              .colorDomain([1, 20])
+              .colors(d3.scaleQuantize().range(["#b9efea", "#6be5db", "#44dfd2", "#19d3c5", "#16baad", "#13a195", "#10877d", "#0d6e66"]))
+              //.colors(d3.scaleQuantize().range(["#dae6ff", "#b3cbff", "#89adfa", "#7b9be0", "#6d8ac7", "#5f78ad", "#516694", "#43557a", "#354361"]))
+              .colorDomain([1, 50])
               .colorCalculator(function (d) { return (!d || d == 0) ? '#eee' : chart.colors()(d);})
               .overlayGeoJson(dpt, "region", function (d) { return d.properties.reg_istat_code_num.toString(); })
               .title(function (d) {

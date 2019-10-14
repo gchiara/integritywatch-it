@@ -24,8 +24,13 @@ import ChartHeader from './components/ChartHeader.vue';
 
 Vue.component('chart-header', ChartHeader);
 
+var vuedata = {
+  page: 'about'
+}
+
 new Vue({
   el: '#app',
+  data: vuedata,
   methods: {
     getUrlParameter(sParam) {
       var sPageURL = decodeURIComponent(window.location.search.substring(1)),

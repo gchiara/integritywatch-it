@@ -5,15 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>About</title>
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600,700|Barlow+Semi+Condensed:400,700|Roboto:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/about.css">
 </head>
 <body>
-    <?php include 'header.php' ?>
-
-    <div id="app">    
+    <div id="app">   
+      <?php include 'header.php' ?> 
       <div class="container">
         <div class="panel-group" id="accordion">
           <!-- BLOCK 1 -->
