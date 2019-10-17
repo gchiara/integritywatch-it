@@ -34,34 +34,34 @@ var vuedata = {
   travelFilter: 'all',
   charts: {
     istituzioni: {
-      title: 'Istituzioni',
-      info: ''
+      title: 'Istituzioni di appartenenza',
+      info: 'Ogni fetta del grafico a torta indica la specifica istituzione di appartenenza dei Parlamentari e membri del Governo considerati.'
     },
     partiti: {
-      title: 'Partiti Politici',
-      info: ''
+      title: 'Partiti e movimenti',
+      info: 'Ogni fetta del grafico rappresenta il singolo partito o movimento politico a cui appartengono i soggetti considerati. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sui membri del Governo e/o del Parlamento, appartenenti al partito o movimento, che hanno ruoli e partecipazioni in aziende.'
     },
     fatturato: {
       title: 'Fatturato',
-      info: ''
+      info: 'Ogni barra del grafico rappresenta un intervallo di fatturato delle aziende in cui membri del Governo e/o del Parlamento hanno dei ruoli. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sul loro ruolo nelle aziende selezionate.'
     },
     settore: {
       title: 'Settore economico',
-      info: ''
+      info: 'Ogni fetta del grafico a torta rappresenta un macro settore economico a cui appartengono le aziende in cui membri del Governo e/o del Parlamento hanno dei ruoli. Cliccando su un singolo settore, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sulle aziende selezionate e i politici che hanno un ruolo in esse.'
     },
     ruolo: {
-      title: 'Ruolo nell\'azienda',
-      info: ''
+      title: 'Quale ruolo hanno nelle aziende?',
+      info: 'Ogni barra rappresenta uno specifico ruolo che membri del Governo e/o del Parlamento ricoprono nelle azienda. Cliccando su una singola barra, potrai visualizzare nella tabella sotto i nomi di tutti coloro che ricoprono quella specifica carica.'
     },
     map: {
       title: 'Aziende per regione',
-      info: ''
+      info: 'Distribuzione delle aziende in cui membri del Governo e/o del Parlamento hanno dei ruoli.  Ciccando su ogni singola regione, potrai visualizzare nella tabella sotto i nomi di tutti i politici che hanno un ruolo nelle aziende della regione.'
     },
     mainTable: {
       chart: null,
       type: 'table',
       title: 'INTERESSI PRIVATI',
-      info: 'Lorem ipsum.'
+      info: 'Nella tabella è riportato l’elenco dei singoli ruoli che i politici ricoprono in aziende private con un riepilogo delle infromazioni aggiuntive sui politici stessi e sull’azienda. Cliccando sul titolo di ogni colonna potrai ordinare l’elenco secondo il tuo interesse.'
     }
   },
   selectedElement: { "P": "", "Sub": ""},

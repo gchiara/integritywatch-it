@@ -34,34 +34,34 @@ var vuedata = {
   travelFilter: 'all',
   charts: {
     tipoRicevente: {
-      title: 'Tipo di ricevente',
-      info: ''
+      title: 'Chi sono i riceventi?',
+      info: 'Ogni fetta del grafico a torta rappresenta la categoria a cui appartiene il soggettto che ha ricevuto il finanziamento da privati. Cliccando su ogni singola categoria, visualizzerai attraverso gli altri grafici informazioni dettagliate sui soggetti appartenenti a quella specifica categoria di riceventi.'
     },
     importoAnnuo: {
-      title: 'Importo all\'anno',
-      info: ''
+      title: 'Quanti soldi hanno ricevuto?',
+      info: 'Ammontare totale in euro dei contributi ricevuti per ogni singolo anno, a partire dal 2018.'
     },
     topDonatori: {
-      title: 'Top 10 Donatori',
-      info: ''
+      title: 'Top 10',
+      info: 'Top 10 dei soggetti che hanno fatto donazioni di un maggiore importo. I colori rispecchiano la categoria di appartenenza del donatore dettata dal grafico seguente.'
     },
     tipoDonatore: {
-      title: 'Tipo di donatori',
-      info: ''
+      title: 'Chi finanzia la politica?',
+      info: 'Ogni fetta del grafico a torta rappresenta una tipologia specifica di donatore. Cliccando su una singola categoria, attraverso gli altri grafici potrai visualizzare informazioni più precise sui donatori appartenenti alla tipologia selezionata.'
     },
     affiliazione: {
       title: 'Numero di donazioni per affiliazione politica',
-      info: ''
+      info: 'Ogni barra rappresenta il numero di donazioni riconducibili ad ogni singolo partito o movimento politico, ovvero quelli che hanno ricevuto direttamente o che hanno ricevuto i loro membri o liste e comitati ad esso associati. Cliccando su una singola barra, potrai visualizzare nella tabella in basso i nomi di tutti i donatori'
     },
     importo: {
       title: 'Numero di donazioni per importo della donazione',
-      info: ''
+      info: 'Ogni barra rappresenta il numero totale di donazioni ricevuto per un dato intervallo di importo. Facendo click su una barra visualizzerai i nomi di tutti coloro che hanno fatto donazioni il cui ammontare è incluso in quel determinato range.'
     },
     mainTable: {
       chart: null,
       type: 'table',
-      title: 'INTERESSI PRIVATI',
-      info: 'Lorem ipsum.'
+      title: 'DONAZIONI',
+      info: 'Nella tabella è riportato l’elenco delle singole donazioni e un riepilogo delle infromazioni aggiuntive su riceventi e donatori. Cliccando sul titolo di ogni colonna potrai ordinare l’elenco secondo il tuo interesse.'
     }
   },
   selectedElement: { "P": "", "Sub": ""},

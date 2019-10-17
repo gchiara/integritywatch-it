@@ -209,6 +209,7 @@ $color_lobby: #42b983;
   position: fixed;
   box-shadow: 0px -2px 2px rgba(0,0,0,0.1); 
   z-index: 10000;
+  height: 80px;
   .footer-col {
     height: 80px;
   }
@@ -279,11 +280,37 @@ $color_lobby: #42b983;
           display: none;
         }
       }
+      &.count-box-donors {
+        @media only screen and (max-width: 1060px) {
+          display: none;
+        }
+      }
+      &.count-box-recipients {
+        @media only screen and (max-width: 1060px) {
+          display: none;
+        }
+      }
       &.count-box-donazioni {
         width: 155px;
       }
       &.count-box-importo {
         width: 190px;
+        @media only screen and (max-width: 1255px) {
+          display: none;
+        }
+      }
+      &.count-box-legislatori {
+        @media only screen and (max-width: 1060px) {
+          display: none;
+        }
+      }
+      &.count-box-interessi {
+
+      }
+      &.count-box-aziende {
+        @media only screen and (max-width: 1060px) {
+          display: none;
+        }
       }
       .filter-count {
         color: #00a7e1;
@@ -314,6 +341,10 @@ $color_lobby: #42b983;
     &:hover, &:focus, &.active {
       background: #ef494a;
       outline: none;
+    }
+    @media only screen and (max-width: 767px) {
+      right: auto;
+      left: 30px;
     }
     .reset-btn-text {
       @media only screen and (max-width: 767px) {
@@ -467,7 +498,6 @@ $color_lobby: #42b983;
   background: #e0e2e6;;
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
-  //font-family: 'Roboto', sans-serif;
 }
 .dc-chart g.row text {
   fill: #000;

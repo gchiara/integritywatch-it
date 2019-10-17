@@ -12,7 +12,7 @@
         <a href="./donazioni.php" class="nav-link" :class="{active: page == 'tabC'}">Finanziamento Politico</a>
       </li>
       <li class="nav-item">
-        <a href="./about.php" class="nav-link" :class="{active: page == 'about'}">About</a>
+        <a href="./about.php" class="nav-link" :class="{active: page == 'about'}">Info su Integrity Watch Italia</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

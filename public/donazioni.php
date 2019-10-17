@@ -22,8 +22,9 @@
               <!-- INFO -->
               <div class="col-md-8 chart-col" v-if="showInfo">
                 <div class="boxed-container description-container">
-                  <h1>Integrity Watch Italia - Finaziamento politico</h1>
-                  <p>Lorem ipsum sit dolor amet adipiscit elur.</p> 
+                  <h1>Integrity Watch Italia - Finaziamento alla Politica</h1>
+                  <p>Database interattivo dall’uso intuitivo che fornisce una panoramica unica riguardante i contributi ricevuti dai partiti e movimenti politici nazionali, dai membri del Parlamento e dai comitati e liste ad essi collegati.</p> 
+                  <p>Con un semplice click sui grafici sotto, è possibile classificare, ordinare e filtrare tutte le informazioni.</p>
                   <i class="material-icons close-btn" @click="showInfo = false">close</i>
                 </div>
               </div>

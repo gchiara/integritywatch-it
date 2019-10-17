@@ -22,8 +22,9 @@
               <!-- INFO -->
               <div class="col-md-8 chart-col" v-if="showInfo">
                 <div class="boxed-container description-container">
-                  <h1>Integrity Watch Italia - Interessi Privati</h1>
-                  <p>Lorem ipsum sit dolor amet adipiscit elur.</p> 
+                  <h1>Integrity Watch Italia - Ruoli in Aziende</h1>
+                  <p>Database interattivo dall’uso intuitivo che fornisce una panoramica unica riguardante le partecipazioni e i ruoli in aziende assunti da membri del Governo e del Parlamento italiano a partire dalla XVIII legislatura.</p> 
+                  <p>Con un semplice click sui grafici sotto, è possibile classificare, ordinare e filtrare tutte le informazioni.</p>
                   <i class="material-icons close-btn" @click="showInfo = false">close</i>
                 </div>
               </div>
@@ -152,7 +153,7 @@
             <div class="count-box count-box-legislatori">
               <div class="filter-count lgnb">0</div> su <strong class="total-count">0</strong> LEGISLATORI
             </div>
-            <div class="dc-data-count count-box">
+            <div class="dc-data-count count-box count-box-interessi">
               <div class="filter-count">0</div>su <strong class="total-count">0</strong> INTERESSI
             </div>
             <div class="count-box count-box-aziende">
