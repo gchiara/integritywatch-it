@@ -332,11 +332,18 @@ var totalActivities = 0;
 var totalGifts = 0;
 var totalTravels = 0;
 
+
+//Generate random parameter for dynamic dataset loading (to avoid caching)
+var randomPar = '';
+var randomCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+for ( var i = 0; i < 5; i++ ) {
+  randomPar += randomCharacters.charAt(Math.floor(Math.random() * randomCharacters.length));
+}
 //Load data and generate charts
-csv('./data/interessi-privati.csv', (err, interessi) => {
-  csv('./data/persone.csv', (err, persone) => {
-    csv('./data/donazioni.csv', (err, donazioni) => {
-      csv('./data/regioni.csv?1', (err, regioni) => {
+csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
+  csv('./data/persone.csv?' + randomPar, (err, persone) => {
+    csv('./data/donazioni.csv?' + randomPar, (err, donazioni) => {
+      csv('./data/regioni.csv?' + randomPar, (err, regioni) => {
         //Loop through data to apply fixes and calculations
         _.each(persone, function (d) {
           //Count and save number of interests per person
