@@ -34,16 +34,16 @@ var vuedata = {
   travelFilter: 'all',
   charts: {
     tipoRicevente: {
-      title: 'Chi sono i riceventi?',
-      info: 'Ogni fetta del grafico a torta rappresenta la categoria a cui appartiene il soggettto che ha ricevuto il finanziamento da privati. Cliccando su ogni singola categoria, visualizzerai attraverso gli altri grafici informazioni dettagliate sui soggetti appartenenti a quella specifica categoria di riceventi.'
+      title: 'Chi sono i destinatari?',
+      info: 'Ogni fetta del grafico a torta rappresenta la categoria a cui appartiene il soggettto che ha ricevuto il finanziamento da privati. Cliccando su ogni singola categoria, visualizzerai attraverso gli altri grafici informazioni dettagliate sui soggetti appartenenti a quella specifica categoria di destinatari.'
     },
     importoAnnuo: {
-      title: 'Quanti soldi hanno ricevuto?',
-      info: 'Ammontare totale in euro dei contributi ricevuti per ogni singolo anno, a partire dal 2018.'
+      title: 'Soldi ricevuti',
+      info: 'Totale in euro dei contributi ricevuti per ogni singolo anno, a partire da gennaio 2018.'
     },
     topDonatori: {
       title: 'Top 10',
-      info: 'Top 10 dei soggetti che hanno fatto donazioni di un maggiore importo. I colori rispecchiano la categoria di appartenenza del donatore dettata dal grafico seguente.'
+      info: 'I soggetti che hanno contribuito in misura maggiore a finanziare la politica. I colori diversi rispecchiano la categoria di appartenenza del donatore (es. società, persona, associazione, etc.).'
     },
     tipoDonatore: {
       title: 'Chi finanzia la politica?',
@@ -51,7 +51,7 @@ var vuedata = {
     },
     affiliazione: {
       title: 'Numero di donazioni per affiliazione politica',
-      info: 'Ogni barra rappresenta il numero di donazioni riconducibili ad ogni singolo partito o movimento politico, ovvero quelli che hanno ricevuto direttamente o che hanno ricevuto i loro membri o liste e comitati ad esso associati. Cliccando su una singola barra, potrai visualizzare nella tabella in basso i nomi di tutti i donatori'
+      info: 'Ogni barra rappresenta il numero di donazioni riconducibili al singolo partito o movimento politico, ovvero quelli che hanno ricevuto direttamente o che hanno ricevuto i loro membri. Cliccando su una singola barra, potrai visualizzare nella tabella in basso i nomi di tutti i donatori.'
     },
     importo: {
       title: 'Numero di donazioni per importo della donazione',
@@ -61,7 +61,7 @@ var vuedata = {
       chart: null,
       type: 'table',
       title: 'DONAZIONI',
-      info: 'Nella tabella è riportato l’elenco delle singole donazioni e un riepilogo delle infromazioni aggiuntive su riceventi e donatori. Cliccando sul titolo di ogni colonna potrai ordinare l’elenco secondo il tuo interesse.'
+      info: 'Nella tabella è riportato l’elenco delle singole donazioni e un riepilogo delle infromazioni aggiuntive su destinatari e donatori. Cliccando sul titolo di ogni colonna potrai ordinare l’elenco secondo il tuo interesse.'
     }
   },
   selectedElement: { "P": "", "Sub": ""},
@@ -83,15 +83,19 @@ var vuedata = {
       "committee": "#0d769c",
       "association": "#065a77",
       "parliament group": "#014962",
-      "party list": "#013952"
+      "party list": "#013952",
+      "Partito o movimento politico": "#00a7e1",
+      "Parlamentare o membro del Governo": "#0d769c",
+      "Gruppo parlamentare": "#014962"
     },
     donatori: {
-      "person": "#19d3c5",
-      "company/professional": "#16baad",
-      "association/foundation": "#13a195",
-      "party/political movement": "#039185",
-      "local party/political movement": "#90ece4",
-      "parliament group": "#44dfd2"
+      "Parlamentare o membro del Governo": "#29e3d5",
+      "Persona": "#19d3c5",
+      "Società o professionista": "#16baad",
+      "Associazione o fondazione": "#13a195",
+      "Partito o movimento politico": "#039185",
+      "Partito o movimento politico locale": "#90ece4",
+      "Gruppo parlamentare": "#44dfd2"
     },
     //"#90ece4", "#44dfd2", "#19d3c5", "#16baad", "#13a195"
     parties: {
@@ -140,16 +144,20 @@ new Vue({
     share: function (platform) {
       if(platform == 'twitter'){
         var thisPage = window.location.href.split('?')[0];
-        var shareText = 'Share text here ' + thisPage;
+        var shareText = 'Chi finanzia la politica italiana? Tutti i dati su #SoldiePolitica ' + thisPage;
         var shareURL = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText);
         window.open(shareURL, '_blank');
         return;
       }
       if(platform == 'facebook'){
-        var toShareUrl = 'https://integritywatch.nl';
+        var toShareUrl = 'https://www.soldiepolitica.it';
         var shareURL = 'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(toShareUrl);
         window.open(shareURL, '_blank', 'toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250,top=300,left=300');
         return;
+      }
+      if(platform == 'linkedin'){
+        var shareURL = 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fintegritywatch.it&title=Integrity+Watch+Italy&summary=Integrity+Watch+Italy&source=integritywatch.it';
+        window.open(shareURL, '_blank', 'toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes');
       }
     },
     amtToString: function (x){
@@ -168,7 +176,7 @@ new Vue({
 
 //Initialize info popovers
 $(function () {
-  $('[data-toggle="popover"]').popover()
+  $('[data-toggle="popover"]').popover({trigger: "hover"})
 })
 
 //Charts
@@ -312,6 +320,21 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
       return ((a < b) ? 1 : ((a > b) ? -1 : 0));
   }
 });
+//Custom italian currency order for dataTables
+jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+  "currency-pre": function ( a ) {
+      a = a.replace( ".", "" );
+      a = a.replace( ",", "." );
+      a = a.replace( " €", "" );
+      return parseFloat( a );
+  },
+  "currency-asc": function ( a, b ) {
+      return a - b;
+  },
+  "currency-desc": function ( a, b ) {
+      return b - a;
+  }
+} );
 
 
 //Totals for footer counters
@@ -341,6 +364,14 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
           d.amountNum = parseFloat(amountString);
           totalDonations += d.amountNum;
         }
+        //Get donor info if person id present
+        if(d.person_id_transparency !== "") {
+          d.donorInfo = _.find(persone, function (x) { return x.person_id_transparency == d.person_id_transparency });
+        }
+        //Get recipient info if person id present
+        if(d.person_id_recipient !== "") {
+          d.recipientInfo = _.find(persone, function (x) { return x.person_id_transparency == d.person_id_recipient });
+        }
         //Add donor and recipient to the object for total donations calculation
         if(vuedata.totalDonations.donatori[d.donorNameCode]){
           vuedata.totalDonations.donatori[d.donorNameCode] += d.amountNum;
@@ -361,9 +392,18 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
       var ndx = crossfilter(donazioni);
       
       var searchDimension = ndx.dimension(function (d) {
-          var entryString = d.recipient_last_name;
+          var entryString = d.recipient_name + ' ' + d.recipient_last_name + ' ' + d.recipient_party + ' ' + d.recipient_type + ' ' + d.donor_name_01 + ' ' + d.donor_last_name_01 + ' ' + d.donor_type + ' ' + d.donation_year;
           return entryString.toLowerCase();
       });
+
+      //Set charts locale for number formatting
+      var locale = {
+        "decimal": ",",
+        "thousands": ".",
+        "grouping": [3],
+        "currency": ["", " €"]
+      }
+      d3.formatDefaultLocale(locale);
 
       //CHART 1
       var createTipoRiceventeChart = function() {
@@ -426,7 +466,7 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
         var charsLength = recalcCharsLength(width);
         chart
           .width(width)
-          .height(500)
+          .height(470)
           .margins({top: 0, left: 0, right: 0, bottom: 20})
           .group(filteredGroup)
           .dimension(dimension)
@@ -446,10 +486,11 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
               return d.key;
           })
           .title(function (d) {
-              return d.key + ': ' + d.value;
+              return d.key + ': ' + adddots(Math.round(d.value)) + '€';
           })
           .elasticX(true)
           .xAxis().ticks(4);
+          chart.xAxis().tickFormat(d3.format('$,.2r'));
           chart.render();
       }
 
@@ -497,10 +538,12 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
               return d.key;
           })
           .title(function (d) {
-              return d.key + ': ' + d.value;
+              return d.key + ': ' + adddots(Math.round(d.value)) + '€';
           })
           .elasticX(true)
           .xAxis().ticks(4);
+          chart.xAxis().tickFormat(d3.format('$,.2r'));
+          //chart.xAxis().tickFormat(numberFormat);
           chart.render();
       }
 
@@ -572,10 +615,7 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
           .group(filteredGroup)
           .dimension(dimension)
           .colorCalculator(function(d, i) {
-            if(vuedata.colors.parties[d.key]){
-              return vuedata.colors.parties[d.key];
-            }
-            return "#ccc";
+            return vuedata.colors.default;
           })
           .label(function (d) {
               if(d.key && d.key.length > charsLength){
@@ -710,6 +750,7 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
               }
             },
             {
+              "type": "currency",
               "searchable": false,
               "orderable": true,
               "targets": 7,

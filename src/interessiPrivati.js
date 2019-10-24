@@ -35,33 +35,33 @@ var vuedata = {
   charts: {
     istituzioni: {
       title: 'Istituzioni di appartenenza',
-      info: 'Ogni fetta del grafico a torta indica la specifica istituzione di appartenenza dei Parlamentari e membri del Governo considerati.'
+      info: 'Ogni fetta del grafico a torta indica la specifica istituzione di appartenenza dei Parlamentari e membri del Governo considerati. '
     },
     partiti: {
       title: 'Partiti e movimenti',
-      info: 'Ogni fetta del grafico rappresenta il singolo partito o movimento politico a cui appartengono i soggetti considerati. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sui membri del Governo e/o del Parlamento, appartenenti al partito o movimento, che hanno ruoli e partecipazioni in aziende.'
+      info: 'Ogni barra del grafico rappresenta il singolo partito o movimento politico a cui appartengono i soggetti considerati. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sui membri del Governo e/o del Parlamento, appartenenti al partito o movimento, che hanno ruoli e partecipazioni in aziende.'
     },
     fatturato: {
       title: 'Fatturato',
-      info: 'Ogni barra del grafico rappresenta un intervallo di fatturato delle aziende in cui membri del Governo e/o del Parlamento hanno dei ruoli. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sul loro ruolo nelle aziende selezionate.'
+      info: 'Ogni barra del grafico rappresenta un intervallo di fatturato delle aziende in cui membri del Governo e/o del Parlamento hanno degli interessi. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sul loro ruolo nelle aziende selezionate.'
     },
     settore: {
       title: 'Settore economico',
-      info: 'Ogni fetta del grafico a torta rappresenta un macro settore economico a cui appartengono le aziende in cui membri del Governo e/o del Parlamento hanno dei ruoli. Cliccando su un singolo settore, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sulle aziende selezionate e i politici che hanno un ruolo in esse.'
+      info: 'Ogni fetta del grafico a torta rappresenta un macro settore economico a cui appartengono le aziende in cui membri del Governo e/o del Parlamento hanno degli interessi. Cliccando su un singolo settore, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sulle aziende selezionate e i politici che hanno un ruolo in esse.'
     },
     ruolo: {
       title: 'Quale ruolo hanno nelle aziende?',
-      info: 'Ogni barra rappresenta uno specifico ruolo che membri del Governo e/o del Parlamento ricoprono nelle azienda. Cliccando su una singola barra, potrai visualizzare nella tabella sotto i nomi di tutti coloro che ricoprono quella specifica carica.'
+      info: 'Ogni barra rappresenta uno specifico ruolo che membri del Governo e/o del Parlamento ricoprono nelle aziende. Cliccando su una singola barra, potrai visualizzare nella tabella in basso i nomi di tutti coloro che ricoprono quella specifica carica.'
     },
     map: {
       title: 'Aziende per regione',
-      info: 'Distribuzione delle aziende in cui membri del Governo e/o del Parlamento hanno dei ruoli.  Ciccando su ogni singola regione, potrai visualizzare nella tabella sotto i nomi di tutti i politici che hanno un ruolo nelle aziende della regione.'
+      info: 'Distribuzione delle aziende in cui membri del Governo e/o del Parlamento hanno degli interessi.  Ciccando su ogni singola regione, potrai visualizzare nella tabella in basso i nomi di tutti i politici che hanno un ruolo nelle aziende della regione.'
     },
     mainTable: {
       chart: null,
       type: 'table',
       title: 'INTERESSI PRIVATI',
-      info: 'Nella tabella è riportato l’elenco dei singoli ruoli che i politici ricoprono in aziende private con un riepilogo delle infromazioni aggiuntive sui politici stessi e sull’azienda. Cliccando sul titolo di ogni colonna potrai ordinare l’elenco secondo il tuo interesse.'
+      info: 'Nella tabella è riportato l’elenco dei singoli interessi e ruoli che i politici ricoprono in aziende private con un riepilogo delle infromazioni aggiuntive sui politici stessi e sull’azienda. Cliccando sul titolo di ogni colonna potrai ordinare l’elenco secondo il tuo interesse.'
     }
   },
   selectedElement: { "P": "", "Sub": ""},
@@ -74,11 +74,13 @@ var vuedata = {
     },
     generic: ["#3b95d0", "#4081ae", "#406a95", "#395a75" ],
     istituzioni: {
-      "Camera dei Deputati": "#00a7e1",
-      "Senato della Repubblica": "#0e8fc0",
-      "Presidenza del Consiglio dei ministri": "#0d769c",
+      "Camera dei Deputati": "#3dbeeb",
+      "Senato della Repubblica": "#00a7e1",
+      "Presidenza del Consiglio dei ministri": "#0e8fc0",
+      "Ministero dello sviluppo economico": "#0d769c",
       "Ministero degli affari esteri e della cooperazione internazionale": "#065a77",
-      "Ministero delle infrastrutture e dei trasporti": "#014962"
+      "Ministero dell'interno": "#014962",
+      "Ministero delle infrastrutture e dei trasporti": "#073849"
     },
     parties: {
       "Union Valdôtaine": "#59A2C3",
@@ -126,16 +128,20 @@ new Vue({
     share: function (platform) {
       if(platform == 'twitter'){
         var thisPage = window.location.href.split('?')[0];
-        var shareText = 'Share text here ' + thisPage;
+        var shareText = 'Chi finanzia la politica italiana? Tutti i dati su #SoldiePolitica ' + thisPage;
         var shareURL = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText);
         window.open(shareURL, '_blank');
         return;
       }
       if(platform == 'facebook'){
-        var toShareUrl = 'https://integritywatch.nl';
+        var toShareUrl = 'https://www.soldiepolitica.it';
         var shareURL = 'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(toShareUrl);
         window.open(shareURL, '_blank', 'toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250,top=300,left=300');
         return;
+      }
+      if(platform == 'linkedin'){
+        var shareURL = 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fintegritywatch.it&title=Integrity+Watch+Italy&summary=Integrity+Watch+Italy&source=integritywatch.it';
+        window.open(shareURL, '_blank', 'toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes');
       }
     },
   }
@@ -143,7 +149,7 @@ new Vue({
 
 //Initialize info popovers
 $(function () {
-  $('[data-toggle="popover"]').popover()
+  $('[data-toggle="popover"]').popover({trigger: "hover"})
 })
 
 //Charts
@@ -224,42 +230,74 @@ var calcPieSize = function(divId) {
 };
 var resizeGraphs = function() {
   for (var c in charts) {
-    if((c == 'gender' || c == 'age') && vuedata.showAllCharts == false){
-      
-    } else {
-      var sizes = calcPieSize(charts[c].divId);
-      var newWidth = recalcWidth(charts[c].divId);
-      var charsLength = recalcCharsLength(newWidth);
-      if(charts[c].type == 'row'){
-        charts[c].chart.width(newWidth);
-        charts[c].chart.label(function (d) {
-          var thisKey = d.key;
-          if(thisKey.indexOf('###') > -1){
-            thisKey = thisKey.split('###')[0];
-          }
+    var sizes = calcPieSize(charts[c].divId);
+    var newWidth = recalcWidth(charts[c].divId);
+    var charsLength = recalcCharsLength(newWidth);
+    if(charts[c].type == 'map') {
+      var newProjection = d3.geoMercator()
+        .center([11,45])
+        .translate([newWidth/2 - (newWidth/10), 120])
+        .scale(newWidth*3);
+      if(newWidth <= 558) {
+        newProjection = d3.geoMercator()
+        .center([11,45]) 
+        .translate([newWidth/2 - (newWidth/10), 120])
+        .scale(newWidth*4);
+      } else if(newWidth <= 610) {
+        newProjection = d3.geoMercator()
+        .center([11,45])
+        .translate([newWidth/2 - (newWidth/10), 120])
+        .scale(newWidth*3.5);
+      }
+      charts[c].chart.width(newWidth);
+      charts[c].chart.projection(newProjection);
+      charts[c].chart.redraw();
+    } else if(charts[c].type == 'row'){
+      charts[c].chart.width(newWidth);
+      charts[c].chart.label(function (d) {
+        var thisKey = d.key;
+        if(thisKey.indexOf('###') > -1){
+          thisKey = thisKey.split('###')[0];
+        }
+        if(thisKey.length > charsLength){
+          return thisKey.substring(0,charsLength) + '...';
+        }
+        return thisKey;
+      })
+      charts[c].chart.redraw();
+    } else if(charts[c].type == 'bar') {
+      charts[c].chart.width(newWidth);
+      charts[c].chart.rescale();
+      charts[c].chart.redraw();
+    } else if(charts[c].type == 'pie') {
+      charts[c].chart
+        .width(sizes.width)
+        .height(sizes.height)
+        .cy(sizes.cy)
+        .innerRadius(sizes.innerRadius)
+        .radius(sizes.radius)
+        //.legend(dc.legend().x(0).y(sizes.legendY).gap(10));
+        .legend(dc.legend().x(0).y(sizes.legendY).gap(10).legendText(function(d) { 
+          var thisKey = d.name;
           if(thisKey.length > charsLength){
             return thisKey.substring(0,charsLength) + '...';
           }
           return thisKey;
-        })
-        charts[c].chart.redraw();
-      } else if(charts[c].type == 'bar') {
-        charts[c].chart.width(newWidth);
-        charts[c].chart.rescale();
-        charts[c].chart.redraw();
-      } else if(charts[c].type == 'pie') {
+        }))
+      if(charts[c].divId == 'settore_chart') {
         charts[c].chart
-          .width(sizes.width)
-          .height(sizes.height)
-          .cy(sizes.cy)
-          .innerRadius(sizes.innerRadius)
-          .radius(sizes.radius)
-          .legend(dc.legend().x(0).y(sizes.legendY).gap(10));
-        charts[c].chart.redraw();
-      } else if(charts[c].type == 'cloud') {
-        charts[c].chart.size(recalcWidthWordcloud());
-        charts[c].chart.redraw();
+        .legend(dc.legend().x(0).y(sizes.legendY).gap(10).autoItemWidth(true).horizontal(true).legendWidth(sizes.width).legendText(function(d) { 
+          var thisKey = d.name;
+          if(thisKey.length > charsLength){
+            return thisKey.substring(0,charsLength) + '...';
+          }
+          return thisKey;
+        }))
       }
+      charts[c].chart.redraw();
+    } else if(charts[c].type == 'cloud') {
+      charts[c].chart.size(recalcWidthWordcloud());
+      charts[c].chart.redraw();
     }
   }
 };
@@ -302,13 +340,17 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
         //Loop through data to apply fixes and calculations
         _.each(persone, function (d) {
           //Count and save number of interests per person
-          var personInterests = _.filter(interessi, function (x) { return x.person_id_openpolis == d.person_id_openpolis });
+          var personInterests = _.filter(interessi, function (x) { return x.person_id_transparency == d.person_id_transparency });
           d.interestsNum = personInterests.length;
         });
         _.each(interessi, function (d) {
-          d.person = _.find(persone, function (x) { return x.person_id_openpolis == d.person_id_openpolis });
+          d.person = _.find(persone, function (x) { return x.person_id_transparency == d.person_id_transparency });
           d.provinceInfo = _.find(regioni, function (x) { return x.provincia_code == d.company_headquarter_province });
-          d.regionCode = d.provinceInfo.istat_code;
+          if(d.provinceInfo) {
+            d.regionCode = d.provinceInfo.istat_code;
+          } else {
+            console.log(d.company_headquarter_province);
+          }
         });
       
 
@@ -321,9 +363,18 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
         var ndx = crossfilter(interessi);
         
         var searchDimension = ndx.dimension(function (d) {
-            var entryString = d.company_name;
+            var entryString = d.company_name + ' ' + d.company_transparency_sector + ' ' + d.person_company_role + ' ' + d.person.person_name + ' ' + d.person.person_last_name + ' ' + d.person.person_political_party + ' ' + d.person.government_or_legislature + ' ' + d.person.person_institution;
             return entryString.toLowerCase();
         });
+
+        //Set charts locale for number formatting
+        var locale = {
+          "decimal": ",",
+          "thousands": ".",
+          "grouping": [3],
+          "currency": ["", " €"]
+        }
+        d3.formatDefaultLocale(locale);
 
         //CHART 1
         var createIstituzioniChart = function() {
@@ -333,6 +384,7 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
           });
           var group = dimension.group().reduceSum(function (d) { return 1; });
           var sizes = calcPieSize(charts.istituzioni.divId);
+          var charsLength = recalcCharsLength(sizes.width);
           chart
             .width(sizes.width)
             .height(sizes.height)
@@ -341,8 +393,8 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
             .radius(sizes.radius)
             .legend(dc.legend().x(0).y(sizes.legendY).gap(10).legendText(function(d) { 
               var thisKey = d.name;
-              if(thisKey.length > 40){
-                return thisKey.substring(0,40) + '...';
+              if(thisKey.length > charsLength){
+                return thisKey.substring(0,charsLength) + '...';
               }
               return thisKey;
             }))
@@ -391,7 +443,8 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
             .group(filteredGroup)
             .dimension(dimension)
             .colorCalculator(function(d, i) {
-              return vuedata.colors.parties[d.key];
+              //return vuedata.colors.parties[d.key];
+              return vuedata.colors.default;
             })
             .label(function (d) {
                 if(d.key && d.key.length > charsLength){
@@ -462,9 +515,10 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
             .width(sizes.width)
             .height(sizes.height)
             .cy(sizes.cy)
+            .cap(10)
             .innerRadius(sizes.innerRadius)
             .radius(sizes.radius)
-            .legend(dc.legend().x(0).y(sizes.legendY).gap(10).legendText(function(d) { 
+            .legend(dc.legend().x(0).y(sizes.legendY).gap(10).gap(10).autoItemWidth(true).horizontal(true).legendWidth(sizes.width).legendText(function(d) { 
               var thisKey = d.name;
               if(thisKey.length > 40){
                 return thisKey.substring(0,40) + '...';
@@ -475,7 +529,8 @@ csv('./data/interessi-privati.csv', (err, interessi) => {
               var thisKey = d.key;
               return thisKey + ': ' + d.value;
             })
-            .colors(d3.scaleOrdinal().range(["#90ece4", "#44dfd2", "#19d3c5", "#16baad", "#13a195"]))
+            //.colors(d3.scaleOrdinal().range(["#90ece4", "#44dfd2", "#19d3c5", "#16baad", "#13a195"]))
+            .colors(d3.scaleOrdinal().range(["#d5f5f2", "#c4faf5", "#adf9f2", "#8ceae2", "#67cfc7", "#53c1b7", "#2da399", "#199389", "#047f74", "#016e64", "#01675e"]))
             .dimension(dimension)
             .group(group);
             /*
