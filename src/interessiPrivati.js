@@ -35,11 +35,11 @@ var vuedata = {
   charts: {
     istituzioni: {
       title: 'Istituzioni di appartenenza',
-      info: 'Ogni fetta del grafico a torta indica la specifica istituzione di appartenenza dei Parlamentari e membri del Governo considerati. '
+      info: 'Ogni fetta del grafico a torta indica, per ogni interesse privato riscontrato, l’istituzione di appartenenza dei Parlamentari e membri del Governo.'
     },
     partiti: {
       title: 'Partiti e movimenti',
-      info: 'Ogni barra del grafico rappresenta il singolo partito o movimento politico a cui appartengono i soggetti considerati. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sui membri del Governo e/o del Parlamento, appartenenti al partito o movimento, che hanno ruoli e partecipazioni in aziende.'
+      info: 'Ogni barra del grafico rappresenta, per ogni interesse privato riscontrato, il partito o movimento politico a cui appartengono i soggetti considerati. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sui membri del Governo e/o del Parlamento, appartenenti al partito o movimento, che hanno ruoli e partecipazioni in aziende.'
     },
     fatturato: {
       title: 'Fatturato',
@@ -51,7 +51,7 @@ var vuedata = {
     },
     ruolo: {
       title: 'Quale ruolo hanno nelle aziende?',
-      info: 'Ogni barra rappresenta uno specifico ruolo che membri del Governo e/o del Parlamento ricoprono nelle aziende. Cliccando su una singola barra, potrai visualizzare nella tabella in basso i nomi di tutti coloro che ricoprono quella specifica carica.'
+      info: 'Ogni barra rappresenta, per ogni interesse privato riscontrato, lo specifico ruolo ricoperto dai membri del Governo e/o del Parlamento nelle singole aziende. Cliccando su una singola barra, potrai visualizzare nella tabella in basso i nomi di tutti coloro che ricoprono quella specifica carica.'
     },
     map: {
       title: 'Aziende per regione',
@@ -140,7 +140,7 @@ new Vue({
         return;
       }
       if(platform == 'linkedin'){
-        var shareURL = 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fintegritywatch.it&title=Integrity+Watch+Italy&summary=Integrity+Watch+Italy&source=integritywatch.it';
+        var shareURL = 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fsoldiepolitica.it&title=Soldi+e+Politica&summary=Soldi+e+Poltica&source=soldiepolitica.it';
         window.open(shareURL, '_blank', 'toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes');
       }
     },

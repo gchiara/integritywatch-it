@@ -6,10 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Finanziamenti Politici | Soldi e Politica</title>
     <!-- Add twitter and og meta here -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Soldi e Politica | Finanziamenti Politici" />
+    <meta property="og:description" content="Una panoramica unica sui contributi ricevuti dai partiti e movimenti politici nazionali e dai membri del Parlamento e del Governo." />
+    <meta property="og:image" content="https://www.transparency.it/soldiepolitica/images/preview.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600,700|Barlow+Semi+Condensed:400,700|Roboto:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/donazioni.css">
+    <!-- temporary fix for table arrows path -->
+    <style>
+      table.dataTable thead .sorting {
+        background-image: url("./images/dt/sort_both.png");
+      }
+      table.dataTable thead .sorting_asc {
+        background-image: url("./images/dt/sort_asc.png");
+      }
+      table.dataTable thead .sorting_desc {
+        background-image: url("./images/dt/sort_desc.png");
+      }
+      table.dataTable thead .sorting_asc_disabled {
+        background-image: url("./dt/sort_asc_disabled.png");
+      }
+      table.dataTable thead .sorting_desc_disabled {
+        background-image: url("./dt/sort_desc_disabled.png");
+      }
+    </style>
 </head>
 <body>
     <div id="app" class="tabB">   
@@ -23,7 +48,7 @@
               <div class="col-md-8 chart-col" v-if="showInfo">
                 <div class="boxed-container description-container">
                   <h1>SOLDI E POLITICA – FINANZIAMENTI POLITICI</h1>
-                  <p>Una panoramica unica sui contributi ricevuti dai partiti e movimenti politici nazionali e dai membri del Parlamento e del Governo. </p> 
+                  <p>Una panoramica unica sui contributi ricevuti dai partiti e movimenti politici nazionali e dai membri del Parlamento e del Governo.</p> 
                   <p>Con un semplice click sui grafici, è possibile classificare, ordinare e filtrare tutte le informazioni.</p>
                   <i class="material-icons close-btn" @click="showInfo = false">close</i>
                 </div>
@@ -91,9 +116,9 @@
                   <thead>
                     <tr class="header">
                       <th class="header">Nr</th> 
-                      <th class="header">Ricevente</th>
+                      <th class="header">Destinatario</th>
                       <th class="header">Affiliazione politica</th>
-                      <th class="header">Tipo di ricevente</th> 
+                      <th class="header">Tipo di destinatario</th> 
                       <th class="header">Donatore</th> 
                       <th class="header">Tipo di donatore</th>
                       <th class="header">Anno</th>
@@ -123,7 +148,7 @@
               <div class="container">
                 <div class="row">
                   <div class="col-md-6 details-left">
-                    <div class="details-title details-title-left">RICEVENTE</div>
+                    <div class="details-title details-title-left">DESTINATARIO</div>
                     <div class="details-line"><span class="details-line-title">Nome:</span> {{ selectedElement.recipient_name }} {{ selectedElement.recipient_last_name }}</div>
                     <div class="details-line"><span class="details-line-title">Tipologia:</span> {{ selectedElement.recipient_type }}</div>
                     <div class="details-line"><span class="details-line-title">Affiliazione politica:</span> {{ selectedElement.recipient_party }}</div>
@@ -151,7 +176,7 @@
         <div class="row">
           <div class="footer-col col-12 col-sm-12 footer-counts">
             <div class="count-box count-box-recipients">
-              <div class="filter-count lgnb">0</div> su <strong class="total-count">0</strong> RICEVENTI
+              <div class="filter-count lgnb">0</div> su <strong class="total-count">0</strong> DESTINATARI
             </div>
             <div class="dc-data-count count-box count-box-donazioni">
               <div class="filter-count">0</div>su <strong class="total-count">0</strong> DONAZIONI

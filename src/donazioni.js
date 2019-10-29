@@ -156,7 +156,7 @@ new Vue({
         return;
       }
       if(platform == 'linkedin'){
-        var shareURL = 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fintegritywatch.it&title=Integrity+Watch+Italy&summary=Integrity+Watch+Italy&source=integritywatch.it';
+        var shareURL = 'https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fsoldiepolitica.it&title=Soldi+e+Politica&summary=Soldi+e+Poltica&source=soldiepolitica.it';
         window.open(shareURL, '_blank', 'toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes');
       }
     },

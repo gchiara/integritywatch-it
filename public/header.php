@@ -19,6 +19,7 @@
           Altre versioni
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="https://www.integritywatch.eu/" target="_blank">Europe</a>
           <a class="dropdown-item" href="https://www.integritywatch.fr/" target="_blank">France</a>
           <a class="dropdown-item" href="https://openaccess.transparency.org.uk/" target="_blank">United Kingdom</a>
           <a class="dropdown-item" href="https://integritywatch.cl/" target="_blank">Chile</a>

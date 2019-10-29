@@ -6,10 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Interessi Privati | Soldi e Politica</title>
     <!-- Add twitter and og meta here -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Soldi e Politica | Interessi privati" />
+    <meta property="og:description" content="Una panoramica sulle partecipazioni e i ruoli in aziende assunti da membri del Governo e del Parlamento italiano a partire dalla XVIII legislatura." />
+    <meta property="og:image" content="https://www.transparency.it/soldiepolitica/images/preview.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600,700|Barlow+Semi+Condensed:400,700|Roboto:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/interessiPrivati.css">
+    <!-- temporary fix for table arrows path -->
+    <style>
+      table.dataTable thead .sorting {
+        background-image: url("./images/dt/sort_both.png");
+      }
+      table.dataTable thead .sorting_asc {
+        background-image: url("./images/dt/sort_asc.png");
+      }
+      table.dataTable thead .sorting_desc {
+        background-image: url("./images/dt/sort_desc.png");
+      }
+      table.dataTable thead .sorting_asc_disabled {
+        background-image: url("./dt/sort_asc_disabled.png");
+      }
+      table.dataTable thead .sorting_desc_disabled {
+        background-image: url("./dt/sort_desc_disabled.png");
+      }
+    </style>
 </head>
 <body>
     <div id="app" class="tabA">   
@@ -34,7 +59,7 @@
           <div class="col-md-6 chart-subrow">
             <div class="row chart-subrow-row">
               <div class="col-md-12 subrow-title-container">
-                <div class="subrow-title">LEGISLATORI</div>
+                <div class="subrow-title">POLITICI</div>
               </div>
               <div class="col-md-6 chart-col">
                 <div class="boxed-container chart-container interessi_1">
@@ -92,7 +117,7 @@
                   <thead>
                     <tr class="header">
                       <th class="header">Nr</th> 
-                      <th class="header">Legislatore</th>
+                      <th class="header">Politico</th>
                       <th class="header">Partito</th>
                       <th class="header">Istituzione</th> 
                       <th class="header">Governo o legislatura</th> 
@@ -123,7 +148,7 @@
               <div class="container">
                 <div class="row">
                   <div class="col-md-6 details-left"  v-if="selectedElement.person">
-                    <div class="details-title details-title-left">LEGISLATORE</div>
+                    <div class="details-title details-title-left">POLITICO</div>
                     <div class="details-line"><span class="details-line-title">Nome:</span> {{ selectedElement.person.person_name }} {{ selectedElement.person.person_last_name }}</div>
                     <div class="details-line"><span class="details-line-title">Istituzione:</span> {{ selectedElement.person.person_institution }}</div>
                     <div class="details-line"><span class="details-line-title">Ruolo istituzionale:</span> {{ selectedElement.person.person_institutional_role }}</div>
@@ -151,7 +176,7 @@
         <div class="row">
           <div class="footer-col col-12 col-sm-12 footer-counts">
             <div class="count-box count-box-legislatori">
-              <div class="filter-count lgnb">0</div> su <strong class="total-count">0</strong> LEGISLATORI
+              <div class="filter-count lgnb">0</div> su <strong class="total-count">0</strong> POLITICI
             </div>
             <div class="dc-data-count count-box count-box-interessi">
               <div class="filter-count">0</div>su <strong class="total-count">0</strong> INTERESSI
