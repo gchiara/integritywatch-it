@@ -209,6 +209,7 @@
     <script type="text/javascript" src="vendor/js/dc.js"></script>
     <script type="text/javascript" src="vendor/js/dc.cloud.js"></script>
     <script type="text/javascript" src="vendor/js/topojson.v1.min.js"></script>
+    <script type="text/javascript" src="vendor/js/reductio.min.js"></script>
     <script src="static/interessiPrivati.js"></script>
 
  

@@ -385,11 +385,39 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
 
         //CHART 1
         var createIstituzioniChart = function() {
+          //var reducer = reductio();
           var chart = charts.istituzioni.chart;
           var dimension = ndx.dimension(function (d) {
             return d.person.person_institution; 
           });
-          var group = dimension.group().reduceSum(function (d) { return 1; });
+          //var group = dimension.group().reduceSum(function (d) { return 1; });
+          //Custom reducer
+          var customGroup =  dimension.group().reduce(
+            function(p, d) { 
+              if(d.person_id_transparency in p.ids){
+                  p.ids[d.person_id_transparency]++;
+              }
+              else {
+                  p.ids[d.person_id_transparency] = 1;
+                  p.uniquecount++;
+              }
+              return p;
+            },
+            function (p, d) {
+              p.ids[d.person_id_transparency]--;
+              if(p.ids[d.person_id_transparency] === 0){
+                  delete p.ids[d.person_id_transparency];
+                  p.uniquecount--;
+              }
+              return p;
+            },
+            function () {
+              return {
+                uniquecount: 0,
+                ids: {}
+              };
+            }
+          );
           var sizes = calcPieSize(charts.istituzioni.divId);
           var charsLength = recalcCharsLength(sizes.width);
           chart
@@ -407,13 +435,14 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
             }))
             .title(function(d){
               var thisKey = d.key;
-              return thisKey + ': ' + d.value;
+              return thisKey + ': ' + d.value.uniquecount;
             })
             .dimension(dimension)
             .colorCalculator(function(d, i) {
               return vuedata.colors.istituzioni[d.key];
             })
-            .group(group);
+            .group(customGroup)
+            .valueAccessor(function(d){ return d.value.uniquecount; });
             /*
             .ordering(function(d) { return order.indexOf(d)})
             .colorCalculator(function(d, i) {
@@ -517,6 +546,32 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
             return d.company_transparency_sector; 
           });
           var group = dimension.group().reduceSum(function (d) { return 1; });
+          var customGroup =  dimension.group().reduce(
+            function(p, d) { 
+              if(d.company_id_transparency in p.ids){
+                  p.ids[d.company_id_transparency]++;
+              }
+              else {
+                  p.ids[d.company_id_transparency] = 1;
+                  p.uniquecount++;
+              }
+              return p;
+            },
+            function (p, d) {
+              p.ids[d.company_id_transparency]--;
+              if(p.ids[d.company_id_transparency] === 0){
+                  delete p.ids[d.company_id_transparency];
+                  p.uniquecount--;
+              }
+              return p;
+            },
+            function () {
+              return {
+                uniquecount: 0,
+                ids: {}
+              };
+            }
+          );
           var sizes = calcPieSize(charts.settore.divId);
           chart
             .width(sizes.width)
@@ -534,18 +589,37 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
             }))
             .title(function(d){
               var thisKey = d.key;
-              return thisKey + ': ' + d.value;
+              return thisKey + ': ' + d.value.uniquecount;
             })
-            //.colors(d3.scaleOrdinal().range(["#90ece4", "#44dfd2", "#19d3c5", "#16baad", "#13a195"]))
             .colors(d3.scaleOrdinal().range(["#d5f5f2", "#c4faf5", "#adf9f2", "#8ceae2", "#67cfc7", "#53c1b7", "#2da399", "#199389", "#047f74", "#016e64", "#01675e"]))
             .dimension(dimension)
-            .group(group);
-            /*
-            .ordering(function(d) { return order.indexOf(d)})
-            .colorCalculator(function(d, i) {
-              return vuedata.colors.parties[d.key];
+            .group(customGroup)
+            .valueAccessor(function(d){ console.log(d.value);return d.value.uniquecount; })
+            .ordering(function(b) {
+              return -b.value.uniquecount;
             });
-            */
+
+          //Fix for using cap with custom valueAccessor
+          chart.cappedValueAccessor = function(d, i) {
+            if (d.others) {
+              return d.value.uniquecount;
+            }
+            return chart.valueAccessor()(d, i);
+          };
+          chart.othersGrouper(function(topItems, restItems) {
+            var restItemsSum = d3.sum(restItems, chart.valueAccessor()),
+              restKeys = restItems.map(chart.keyAccessor());
+            if (restItemsSum > 0) {
+              topItems = topItems.concat([{
+                others: restKeys,
+                key: chart.othersLabel(),
+                value: {
+                  uniquecount: restItemsSum
+                }
+              }]);
+            }
+            return topItems;
+          });
           chart.render();
         }
 
