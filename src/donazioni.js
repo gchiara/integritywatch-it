@@ -731,7 +731,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
               "targets": 4,
               "defaultContent":"N/A",
               "data": function(d) {
-                if(d.donor_type == 'Persona'){
+                if(d.donor_type == 'Persona' || d.donor_type == 'Parlamentare o membro del Governo'){
                   return d.donor_name_01 + ' ' + d.donor_last_name_01;
                 }
                 return d.donor_last_name_01;
