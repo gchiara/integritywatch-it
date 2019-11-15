@@ -702,9 +702,9 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
               "defaultContent":"N/A",
               "data": function(d) {
                 if(d.recipient_type == 'Persona' || d.recipient_type == 'Parlamentare o membro del Governo'){
-                  return d.recipient_name + ' ' + d.recipient_last_name;
+                  return d.recipient_last_name.trim() + ' ' + d.recipient_name;
                 }
-                return d.recipient_last_name;
+                return d.recipient_last_name.trim();
               }
             },
             {
@@ -732,9 +732,9 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
               "defaultContent":"N/A",
               "data": function(d) {
                 if(d.donor_type == 'Persona' || d.donor_type == 'Parlamentare o membro del Governo'){
-                  return d.donor_name_01 + ' ' + d.donor_last_name_01;
+                  return d.donor_last_name_01.trim() + ' ' + d.donor_name_01;
                 }
-                return d.donor_last_name_01;
+                return d.donor_last_name_01.trim();
               }
             },
             {
@@ -770,7 +770,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
           "bPaginate": true,
           "bLengthChange": true,
           "bFilter": false,
-          "order": [[ 1, "desc" ]],
+          "order": [[ 1, "asc" ]],
           "bSort": true,
           "bInfo": true,
           "bAutoWidth": false,

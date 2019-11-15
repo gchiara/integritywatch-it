@@ -722,7 +722,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
                 "defaultContent":"N/A",
                 "data": function(d) {
                   if(d.person){
-                    return d.person.person_name + ' ' + d.person.person_last_name;
+                    return d.person.person_last_name + ' ' + d.person.person_name;
                   }
                   return "N/A";
                 }
@@ -792,7 +792,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
             "bPaginate": true,
             "bLengthChange": true,
             "bFilter": false,
-            "order": [[ 1, "desc" ]],
+            "order": [[ 1, "asc" ]],
             "bSort": true,
             "bInfo": true,
             "bAutoWidth": false,
