@@ -701,7 +701,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
               "targets": 1,
               "defaultContent":"N/A",
               "data": function(d) {
-                if(d.recipient_type == 'person'){
+                if(d.recipient_type == 'Persona' || d.recipient_type == 'Parlamentare o membro del Governo'){
                   return d.recipient_name + ' ' + d.recipient_last_name;
                 }
                 return d.recipient_last_name;
@@ -731,7 +731,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
               "targets": 4,
               "defaultContent":"N/A",
               "data": function(d) {
-                if(d.donor_type == 'person'){
+                if(d.donor_type == 'Persona'){
                   return d.donor_name_01 + ' ' + d.donor_last_name_01;
                 }
                 return d.donor_last_name_01;
