@@ -367,6 +367,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
           amountString = amountString.replace(".", "");
           amountString = amountString.replace(",", ".");
           amountString = amountString.replace(" €", "");
+          amountString = amountString.replace("€ ", "");
           d.amountNum = parseFloat(amountString);
           totalDonations += d.amountNum;
         }
