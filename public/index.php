@@ -75,8 +75,8 @@
               </div>
               <div class="col-md-12 chart-col">
                 <div class="boxed-container chart-container donazioni_5">
-                  <chart-header :title="charts.affiliazione.title" :info="charts.affiliazione.info" ></chart-header>
-                  <div class="chart-inner" id="affiliazione_chart"></div>
+                  <chart-header :title="charts.affiliazioneAmt.title" :info="charts.affiliazioneAmt.info" ></chart-header>
+                  <div class="chart-inner" id="affiliazioneamt_chart"></div>
                 </div>
               </div>
             </div>
@@ -129,6 +129,7 @@
               </div>
             </div>
           </div>
+          <div class="last-data-string">Dati aggiornati al 31/12/2019</div>
         </div>
       </div>
       <!-- DETAILS MODAL -->

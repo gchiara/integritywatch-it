@@ -80,7 +80,8 @@ var vuedata = {
       "Ministero dello sviluppo economico": "#0d769c",
       "Ministero degli affari esteri e della cooperazione internazionale": "#065a77",
       "Ministero dell'interno": "#014962",
-      "Ministero delle infrastrutture e dei trasporti": "#073849"
+      "Ministero delle infrastrutture e dei trasporti": "#073849",
+      "Ministero dell'istruzione, dell'università e della ricerca": "#1d86ac"
     },
     parties: {
       "Union Valdôtaine": "#59A2C3",

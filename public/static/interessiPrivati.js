@@ -46855,7 +46855,8 @@ var vuedata = {
       "Ministero dello sviluppo economico": "#0d769c",
       "Ministero degli affari esteri e della cooperazione internazionale": "#065a77",
       "Ministero dell'interno": "#014962",
-      "Ministero delle infrastrutture e dei trasporti": "#073849"
+      "Ministero delle infrastrutture e dei trasporti": "#073849",
+      "Ministero dell'istruzione, dell'università e della ricerca": "#1d86ac"
     },
     parties: {
       "Union Valdôtaine": "#59A2C3",
@@ -47775,7 +47776,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57447" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49373" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

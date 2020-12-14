@@ -46821,9 +46821,9 @@ var vuedata = {
       title: 'Chi finanzia la politica?',
       info: 'Ogni fetta del grafico a torta rappresenta una tipologia specifica di donatore. Cliccando su una singola categoria, attraverso gli altri grafici potrai visualizzare informazioni più precise sui donatori appartenenti alla tipologia selezionata.'
     },
-    affiliazione: {
-      title: 'Numero di donazioni per affiliazione politica',
-      info: 'Ogni barra rappresenta il numero di donazioni riconducibili al singolo partito o movimento politico, ovvero quelli che hanno ricevuto direttamente o che hanno ricevuto i loro membri. Cliccando su una singola barra, potrai visualizzare nella tabella in basso i nomi di tutti i donatori.'
+    affiliazioneAmt: {
+      title: 'Totale delle donazioni per affiliazione politica',
+      info: 'Ogni barra rappresenta la somma del valore delle donazioni riconducibili al singolo partito o movimento politico, ovvero quelli che hanno ricevuto direttamente o che hanno ricevuto i loro membri. Cliccando su una singola barra, potrai visualizzare nella tabella in basso i nomi di tutti i donatori.'
     },
     importo: {
       title: 'Numero di donazioni per importo della donazione',
@@ -46861,7 +46861,8 @@ var vuedata = {
       "party list": "#013952",
       "Partito o movimento politico": "#00a7e1",
       "Parlamentare o membro del Governo": "#0d769c",
-      "Gruppo parlamentare": "#014962"
+      "Gruppo parlamentare": "#014962",
+      "Associazione, fondazione o comitato": "#20b7f1"
     },
     donatori: {
       "Parlamentare o membro del Governo": "#29e3d5",
@@ -46870,7 +46871,10 @@ var vuedata = {
       "Associazione o fondazione": "#13a195",
       "Partito o movimento politico": "#039185",
       "Partito o movimento politico locale": "#90ece4",
-      "Gruppo parlamentare": "#44dfd2"
+      "Gruppo parlamentare": "#44dfd2",
+      "Associazione, fondazione o comitato": "#038175",
+      "Ente pubblico": "#037165",
+      "Lista di partito": "#036155"
     },
     //"#90ece4", "#44dfd2", "#19d3c5", "#16baad", "#13a195"
     parties: {
@@ -46979,10 +46983,10 @@ var charts = {
     type: 'pie',
     divId: 'tipodonatore_chart'
   },
-  affiliazione: {
-    chart: dc.rowChart("#affiliazione_chart"),
+  affiliazioneAmt: {
+    chart: dc.rowChart("#affiliazioneamt_chart"),
     type: 'row',
-    divId: 'affiliazione_chart'
+    divId: 'affiliazioneamt_chart'
   },
   importo: {
     chart: dc.rowChart("#importo_chart"),
@@ -47142,6 +47146,7 @@ for (var i = 0; i < 5; i++) {
         d.donorNameCode = d.donorFullName.trim().replace(/ /g, '_');
         d.recipientFullName = d.recipient_name + ' ' + d.recipient_last_name;
         d.recipientNameCode = d.recipientFullName.trim().replace(/ /g, '_');
+        d.donation_range = d.donation_range.trim();
         d.amountNum = 0;
 
         if (d.donation_amount) {
@@ -47371,16 +47376,16 @@ for (var i = 0; i < 5; i++) {
         */
 
         chart.render();
-      }; //CHART 5
+      }; //CHART 5 
 
 
-      var createAffiliazioneChart = function createAffiliazioneChart() {
-        var chart = charts.affiliazione.chart;
+      var createAffiliazioneAmtChart = function createAffiliazioneAmtChart() {
+        var chart = charts.affiliazioneAmt.chart;
         var dimension = ndx.dimension(function (d) {
           return d.recipient_party;
         });
         var group = dimension.group().reduceSum(function (d) {
-          return 1;
+          return d.amountNum;
         });
 
         var filteredGroup = function (source_group) {
@@ -47393,7 +47398,7 @@ for (var i = 0; i < 5; i++) {
           };
         }(group);
 
-        var width = recalcWidth(charts.affiliazione.divId);
+        var width = recalcWidth(charts.affiliazioneAmt.divId);
         var charsLength = recalcCharsLength(width);
         chart.width(width).height(500).margins({
           top: 0,
@@ -47409,7 +47414,7 @@ for (var i = 0; i < 5; i++) {
 
           return d.key;
         }).title(function (d) {
-          return d.key + ': ' + d.value;
+          return d.key + ': ' + adddots(Math.round(d.value)) + '€';
         }).elasticX(true).xAxis().ticks(4);
         chart.render();
       }; //CHART 6
@@ -47437,7 +47442,7 @@ for (var i = 0; i < 5; i++) {
         var order = ["0-500,00", "500,01-5000,00", "5000,01-10000,00", "10000,01-50000,00", "50000,01-100000,00", ">100000,01"];
         var width = recalcWidth(charts.importo.divId);
         var charsLength = recalcCharsLength(width);
-        chart.width(width).height(500).margins({
+        chart.width(width).height(530).margins({
           top: 0,
           left: 0,
           right: 0,
@@ -47532,7 +47537,7 @@ for (var i = 0; i < 5; i++) {
             "targets": 7,
             "defaultContent": "N/A",
             "data": function data(d) {
-              return d.donation_amount;
+              return adddots(d.donation_amount);
             }
           }],
           "iDisplayLength": 25,
@@ -47623,7 +47628,7 @@ for (var i = 0; i < 5; i++) {
       createImportoAnnuoChart();
       createTopDonatoriChart();
       createTipoDonatoreChart();
-      createAffiliazioneChart();
+      createAffiliazioneAmtChart();
       createImportoChart();
       createTable();
       $('.dataTables_wrapper').append($('.dataTables_length')); //Toggle last charts functionality and fix for responsiveness
@@ -47780,7 +47785,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57447" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49373" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

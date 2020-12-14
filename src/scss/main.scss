@@ -852,10 +852,10 @@ table.dataTable tbody tr:hover {
     height: 600px;
   }
   &.donazioni_5 {
-    height: 600px;
+    height: 620px;
   }
   &.donazioni_6 {
-    height: 600px;
+    height: 620px;
   }
 }
 
@@ -889,4 +889,10 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
   background-position: center left;
   padding-left: 20px;
   padding-right: 15px;
+}
+
+.last-data-string {
+  padding: 5px 20px;
+  color: #002c3d;
+  font-weight: 600;
 }
