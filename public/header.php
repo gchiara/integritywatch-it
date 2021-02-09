@@ -19,10 +19,16 @@
           Altre versioni
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="https://www.integritywatch.eu/" target="_blank">Europe</a>
-          <a class="dropdown-item" href="https://www.integritywatch.fr/" target="_blank">France</a>
-          <a class="dropdown-item" href="https://openaccess.transparency.org.uk/" target="_blank">United Kingdom</a>
-          <a class="dropdown-item" href="https://integritywatch.cl/" target="_blank">Chile</a>
+			<a class="dropdown-item" href="https://www.integritywatch.eu/" target="_blank">Unione Europea</a>
+			<a class="dropdown-item" href="https://www.integritywatch.fr/" target="_blank">Francia</a>
+			<a class="dropdown-item" href="https://www.integritywatch.gr/" target="_blank">Grecia</a>
+			<a class="dropdown-item" href="https://deputatiuzdelnas.lv/" target="_blank">Lettonia</a>
+			<a class="dropdown-item" href="https://manoseimas.lt/" target="_blank">Lituania</a>
+			<a class="dropdown-item" href="https://www.integritywatch.nl/" target="_blank">Olanda</a>
+			<a class="dropdown-item" href="http://varuhintegritete.transparency.si/" target="_blank">Slovenia</a>
+			<a class="dropdown-item" href="https://integritywatch.es/" target="_blank">Spagna</a>
+			<a class="dropdown-item" href="https://openaccess.transparency.org.uk/" target="_blank">Regno Unito</a>
+			<a class="dropdown-item" href="https://integritywatch.cl/" target="_blank">Chile</a>
         </div>
       </li>
     </ul>

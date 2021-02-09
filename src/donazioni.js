@@ -34,30 +34,37 @@ var vuedata = {
   travelFilter: 'all',
   charts: {
     tipoRicevente: {
+      id: 'tipoRicevente',
       title: 'Chi sono i destinatari?',
       info: 'Ogni fetta del grafico a torta rappresenta la categoria a cui appartiene il soggettto che ha ricevuto il finanziamento da privati. Cliccando su ogni singola categoria, visualizzerai attraverso gli altri grafici informazioni dettagliate sui soggetti appartenenti a quella specifica categoria di destinatari.'
     },
     importoAnnuo: {
+      id: 'importoAnnuo',
       title: 'Soldi ricevuti',
       info: 'Totale in euro dei contributi ricevuti per ogni singolo anno, a partire da gennaio 2018.'
     },
     topDonatori: {
+      id: 'topDonatori',
       title: 'Top 10',
       info: 'I soggetti che hanno contribuito in misura maggiore a finanziare la politica. I colori diversi rispecchiano la categoria di appartenenza del donatore (es. società, persona, associazione, etc.).'
     },
     tipoDonatore: {
+      id: 'tipoDonatore',
       title: 'Chi finanzia la politica?',
       info: 'Ogni fetta del grafico a torta rappresenta una tipologia specifica di donatore. Cliccando su una singola categoria, attraverso gli altri grafici potrai visualizzare informazioni più precise sui donatori appartenenti alla tipologia selezionata.'
     },
     affiliazioneAmt: {
+      id: 'affiliazioneAmt',
       title: 'Totale delle donazioni per affiliazione politica',
       info: 'Ogni barra rappresenta la somma del valore delle donazioni riconducibili al singolo partito o movimento politico, ovvero quelli che hanno ricevuto direttamente o che hanno ricevuto i loro membri. Cliccando su una singola barra, potrai visualizzare nella tabella in basso i nomi di tutti i donatori.'
     },
     importo: {
+      id: 'importo',
       title: 'Numero di donazioni per importo della donazione',
       info: 'Ogni barra rappresenta il numero totale di donazioni ricevuto per un dato intervallo di importo. Facendo click su una barra visualizzerai i nomi di tutti coloro che hanno fatto donazioni il cui ammontare è incluso in quel determinato range.'
     },
     mainTable: {
+      id: 'mainTable',
       chart: null,
       type: 'table',
       title: 'DONAZIONI',
@@ -144,6 +151,23 @@ new Vue({
   el: '#app',
   data: vuedata,
   methods: {
+    //Copy to clipboard
+    copyToClipboard: function(elId) {
+      var textToCopy = document.getElementById(elId);
+      textToCopy.select();
+      textToCopy.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      console.log("Copied: " + textToCopy.value);
+    },
+    //Share chart image
+    shareChart: function(platform) {
+      if(platform == 'twitter'){
+        var shareText = $('#chartUrlString').val();
+        var shareURL = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText);
+        window.open(shareURL, '_blank');
+        return;
+      }
+    },
     //Share
     share: function (platform) {
       if(platform == 'twitter'){
@@ -425,9 +449,10 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
         });
         var group = dimension.group().reduceSum(function (d) { return 1; });
         var sizes = calcPieSize(charts.tipoRicevente.divId);
+        var height = $('#'+charts.tipoDonatore.divId + '_container').height();
         chart
           .width(sizes.width)
-          .height(sizes.height)
+          .height(height)
           .cy(sizes.cy)
           .innerRadius(sizes.innerRadius)
           .radius(sizes.radius)
@@ -567,9 +592,12 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
         });
         var group = dimension.group().reduceSum(function (d) { return 1; });
         var sizes = calcPieSize(charts.tipoDonatore.divId);
+        var height = $('#'+charts.tipoDonatore.divId + '_container').height();
+        console.log(height);
         chart
           .width(sizes.width)
-          .height(sizes.height)
+          //.height(sizes.height)
+          .height(height)
           .cy(sizes.cy)
           .innerRadius(sizes.innerRadius)
           .radius(sizes.radius)

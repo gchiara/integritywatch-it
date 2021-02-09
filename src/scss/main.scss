@@ -896,3 +896,82 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
   color: #002c3d;
   font-weight: 600;
 }
+
+
+.hide-scrollbar {
+	overflow: -moz-hidden-unscrollable;
+  overflow: hidden;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-shadow {
+  box-shadow: unset !important;
+}
+
+/* CHARTS SHARE MODAL */
+#chartShareModal {
+  z-index: 100000;
+  .modal-dialog {
+    max-width: 100%;
+    width: 700px;
+  }
+  .modal-title {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .copy-input-container {
+    input {
+      text-align: center;
+      width: 450px;
+      max-width: 90%;
+      color: #555;
+      border: none;
+      border-radius: 3px;
+      background: #eee;
+      padding: 5px 10px;
+    }
+    button {
+      text-align: center;
+      border: none;
+      border-radius: 3px;
+      background: #ef494a;
+      padding: 5px 10px;
+      color: #fff; 
+      i {
+        text-align: center;
+        font-size: 15px;
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+  .chart-share-btn-container {
+    margin: 20px auto;
+    button {
+      &.btn-twitter {
+        text-align: center;
+        border: none;
+        border-radius: 3px;
+        background: #1DA1F2;
+        padding: 7px 15px;
+        color: #fff; 
+        img {
+          height: 20px;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+  .chart-img-preview {
+    border: 2px solid #eee;
+    padding: 10px;
+    width: 300px;
+    max-width: 90%;
+    margin-bottom: 30px;
+  }
+}

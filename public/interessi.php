@@ -62,20 +62,20 @@
                 <div class="subrow-title">POLITICI</div>
               </div>
               <div class="col-md-6 chart-col">
-                <div class="boxed-container chart-container interessi_1">
-                  <chart-header :title="charts.istituzioni.title" :info="charts.istituzioni.info" ></chart-header>
+                <div class="boxed-container chart-container interessi_1" id="istituzioni_chart_container">
+                  <chart-header :title="charts.istituzioni.title" :info="charts.istituzioni.info" :chartid="charts.istituzioni.id" ></chart-header>
                   <div class="chart-inner" id="istituzioni_chart"></div>
                 </div>
               </div>
               <div class="col-md-6 chart-col">
-                <div class="boxed-container chart-container interessi_2">
-                  <chart-header :title="charts.partiti.title" :info="charts.partiti.info" ></chart-header>
+                <div class="boxed-container chart-container interessi_2" id="partiti_chart_container">
+                  <chart-header :title="charts.partiti.title" :info="charts.partiti.info" :chartid="charts.partiti.id" ></chart-header>
                   <div class="chart-inner" id="partiti_chart"></div>
                 </div>
               </div>
               <div class="col-md-12 chart-col">
-                <div class="boxed-container chart-container interessi_5">
-                  <chart-header :title="charts.ruolo.title" :info="charts.ruolo.info" ></chart-header>
+                <div class="boxed-container chart-container interessi_5" id="ruolo_chart_container">
+                  <chart-header :title="charts.ruolo.title" :info="charts.ruolo.info" :chartid="charts.ruolo.id" ></chart-header>
                   <div class="chart-inner" id="ruolo_chart"></div>
                 </div>
               </div>
@@ -88,20 +88,20 @@
                 <div class="subrow-title subrow-title-right">AZIENDE</div>
               </div>
               <div class="col-md-6 chart-col">
-                <div class="boxed-container chart-container interessi_3">
-                  <chart-header :title="charts.fatturato.title" :info="charts.fatturato.info" ></chart-header>
+                <div class="boxed-container chart-container interessi_3" id="fatturato_chart_container">
+                  <chart-header :title="charts.fatturato.title" :info="charts.fatturato.info" :chartid="charts.fatturato.id" ></chart-header>
                   <div class="chart-inner" id="fatturato_chart"></div>
                 </div>
               </div>
               <div class="col-md-6 chart-col">
-                <div class="boxed-container chart-container interessi_4">
-                  <chart-header :title="charts.settore.title" :info="charts.settore.info" ></chart-header>
+                <div class="boxed-container chart-container interessi_4" id="settore_chart_container">
+                  <chart-header :title="charts.settore.title" :info="charts.settore.info" :chartid="charts.settore.id" ></chart-header>
                   <div class="chart-inner" id="settore_chart"></div>
                 </div>
               </div>
               <div class="col-md-12 chart-col">
-                <div class="boxed-container chart-container interessi_6">
-                  <chart-header :title="charts.map.title" :info="charts.map.info" ></chart-header>
+                <div class="boxed-container chart-container interessi_6" id="map_chart_container">
+                  <chart-header :title="charts.map.title" :info="charts.map.info" :chartid="charts.map.id" ></chart-header>
                   <div class="chart-inner" id="map_chart"></div>
                 </div>
               </div>
@@ -171,6 +171,29 @@
           </div>
         </div>
       </div>
+      <!-- Chart share modal -->
+      <div class="modal" id="chartShareModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <div class="modal-title">Condividi grafico</div>
+              <button type="button" class="close" data-dismiss="modal"><i class="material-icons">close</i></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="copy-input-container">
+                <input type="text" value="" id="chartUrlString" readonly>
+                <button @click="copyToClipboard('chartUrlString')"><i class="material-icons">content_copy</i> Copia</button>
+              </div>
+              <div class="chart-share-btn-container">
+                <button class="btn-twitter" @click="shareChart('twitter')"><img src="./images/twitter.png" /> Condividi su Twitter</button>
+              </div>
+              <img src="" class="chart-img-preview" />
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Bottom bar -->
       <div class="container-fluid footer-bar">
         <div class="row">
@@ -210,6 +233,7 @@
     <script type="text/javascript" src="vendor/js/dc.cloud.js"></script>
     <script type="text/javascript" src="vendor/js/topojson.v1.min.js"></script>
     <script type="text/javascript" src="vendor/js/reductio.min.js"></script>
+    <script type="text/javascript" src="vendor/js/html2canvas.min.js"></script>
     <script src="static/interessiPrivati.js"></script>
 
  

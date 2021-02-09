@@ -62,20 +62,20 @@
                 <div class="subrow-title">DESTINATARI</div>
               </div>
               <div class="col-md-6 chart-col">
-                <div class="boxed-container chart-container donazioni_1">
-                  <chart-header :title="charts.tipoRicevente.title" :info="charts.tipoRicevente.info" ></chart-header>
+                <div class="boxed-container chart-container donazioni_1" id="tiporicevente_chart_container">
+                  <chart-header :title="charts.tipoRicevente.title" :info="charts.tipoRicevente.info" :chartid="charts.tipoRicevente.id"></chart-header>
                   <div class="chart-inner" id="tiporicevente_chart"></div>
                 </div>
               </div>
               <div class="col-md-6 chart-col">
-                <div class="boxed-container chart-container donazioni_2">
-                  <chart-header :title="charts.importoAnnuo.title" :info="charts.importoAnnuo.info" ></chart-header>
+                <div class="boxed-container chart-container donazioni_2" id="importoannuo_chart_container">
+                  <chart-header :title="charts.importoAnnuo.title" :info="charts.importoAnnuo.info" :chartid="charts.importoAnnuo.id"></chart-header>
                   <div class="chart-inner" id="importoannuo_chart"></div>
                 </div>
               </div>
               <div class="col-md-12 chart-col">
-                <div class="boxed-container chart-container donazioni_5">
-                  <chart-header :title="charts.affiliazioneAmt.title" :info="charts.affiliazioneAmt.info" ></chart-header>
+                <div class="boxed-container chart-container donazioni_5" id="affiliazioneamt_chart_container">
+                  <chart-header :title="charts.affiliazioneAmt.title" :info="charts.affiliazioneAmt.info" :chartid="charts.affiliazioneAmt.id"></chart-header>
                   <div class="chart-inner" id="affiliazioneamt_chart"></div>
                 </div>
               </div>
@@ -88,20 +88,20 @@
                 <div class="subrow-title subrow-title-right">DONATORI</div>
               </div>
               <div class="col-md-6 chart-col">
-                <div class="boxed-container chart-container donazioni_3">
-                  <chart-header :title="charts.topDonatori.title" :info="charts.topDonatori.info" ></chart-header>
+                <div class="boxed-container chart-container donazioni_3" id="topdonatori_chart_container">
+                  <chart-header :title="charts.topDonatori.title" :info="charts.topDonatori.info" :chartid="charts.topDonatori.id"></chart-header>
                   <div class="chart-inner" id="topdonatori_chart"></div>
                 </div>
               </div>
               <div class="col-md-6 chart-col">
-                <div class="boxed-container chart-container donazioni_4">
-                  <chart-header :title="charts.tipoDonatore.title" :info="charts.tipoDonatore.info" ></chart-header>
+                <div class="boxed-container chart-container donazioni_4" id="tipodonatore_chart_container">
+                  <chart-header :title="charts.tipoDonatore.title" :info="charts.tipoDonatore.info" :chartid="charts.tipoDonatore.id"></chart-header>
                   <div class="chart-inner" id="tipodonatore_chart"></div>
                 </div>
               </div>
               <div class="col-md-12 chart-col">
-                <div class="boxed-container chart-container donazioni_6">
-                  <chart-header :title="charts.importo.title" :info="charts.importo.info" ></chart-header>
+                <div class="boxed-container chart-container donazioni_6" id="importo_chart_container">
+                  <chart-header :title="charts.importo.title" :info="charts.importo.info" :chartid="charts.importo.id"></chart-header>
                   <div class="chart-inner" id="importo_chart"></div>
                 </div>
               </div>
@@ -110,7 +110,7 @@
           <!-- TABLE -->
           <div class="col-12 chart-col">
             <div class="boxed-container chart-container chart-container-table">
-              <chart-header :title="charts.mainTable.title" :info="charts.mainTable.info" ></chart-header>
+              <chart-header :title="charts.mainTable.title" :info="charts.mainTable.info"></chart-header>
               <div class="chart-inner chart-table">
                 <table class="table table-hover dc-data-table" id="dc-data-table">
                   <thead>
@@ -172,6 +172,29 @@
           </div>
         </div>
       </div>
+      <!-- Chart share modal -->
+      <div class="modal" id="chartShareModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <div class="modal-title">Condividi grafico</div>
+              <button type="button" class="close" data-dismiss="modal"><i class="material-icons">close</i></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="copy-input-container">
+                <input type="text" value="" id="chartUrlString" readonly>
+                <button @click="copyToClipboard('chartUrlString')"><i class="material-icons">content_copy</i> Copia</button>
+              </div>
+              <div class="chart-share-btn-container">
+                <button class="btn-twitter" @click="shareChart('twitter')"><img src="./images/twitter.png" /> Condividi su Twitter</button>
+              </div>
+              <img src="" class="chart-img-preview" />
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Bottom bar -->
       <div class="container-fluid footer-bar">
         <div class="row">
@@ -212,8 +235,8 @@
     <script type="text/javascript" src="vendor/js/crossfilter.min.js"></script>
     <script type="text/javascript" src="vendor/js/dc.js"></script>
     <script type="text/javascript" src="vendor/js/dc.cloud.js"></script>
+    <script type="text/javascript" src="vendor/js/html2canvas.min.js"></script>
     <script src="static/donazioni.js"></script>
-
  
 </body>
 </html>

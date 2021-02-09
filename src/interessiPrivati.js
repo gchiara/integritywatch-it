@@ -34,26 +34,32 @@ var vuedata = {
   travelFilter: 'all',
   charts: {
     istituzioni: {
+      id: 'istituzioni',
       title: 'Istituzioni di appartenenza',
       info: 'Ogni fetta del grafico a torta indica, per ogni interesse privato riscontrato, l’istituzione di appartenenza dei Parlamentari e membri del Governo.'
     },
     partiti: {
+      id: 'partiti',
       title: 'Partiti e movimenti',
       info: 'Ogni barra del grafico rappresenta, per ogni interesse privato riscontrato, il partito o movimento politico a cui appartengono i soggetti considerati. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sui membri del Governo e/o del Parlamento, appartenenti al partito o movimento, che hanno ruoli e partecipazioni in aziende.'
     },
     fatturato: {
+      id: 'fatturato',
       title: 'Fatturato',
       info: 'Ogni barra del grafico rappresenta un intervallo di fatturato delle aziende in cui membri del Governo e/o del Parlamento hanno degli interessi. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sul loro ruolo nelle aziende selezionate.'
     },
     settore: {
+      id: 'settore',
       title: 'Settore economico',
       info: 'Ogni fetta del grafico a torta rappresenta un macro settore economico a cui appartengono le aziende in cui membri del Governo e/o del Parlamento hanno degli interessi. Cliccando su un singolo settore, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sulle aziende selezionate e i politici che hanno un ruolo in esse.'
     },
     ruolo: {
+      id: 'ruolo',
       title: 'Quale ruolo hanno nelle aziende?',
       info: 'Ogni barra rappresenta, per ogni interesse privato riscontrato, lo specifico ruolo ricoperto dai membri del Governo e/o del Parlamento nelle singole aziende. Cliccando su una singola barra, potrai visualizzare nella tabella in basso i nomi di tutti coloro che ricoprono quella specifica carica.'
     },
     map: {
+      id: 'map',
       title: 'Aziende per regione',
       info: 'Distribuzione delle aziende in cui membri del Governo e/o del Parlamento hanno degli interessi.  Ciccando su ogni singola regione, potrai visualizzare nella tabella in basso i nomi di tutti i politici che hanno un ruolo nelle aziende della regione.'
     },
@@ -125,6 +131,23 @@ new Vue({
   el: '#app',
   data: vuedata,
   methods: {
+    //Copy to clipboard
+    copyToClipboard: function(elId) {
+      var textToCopy = document.getElementById(elId);
+      textToCopy.select();
+      textToCopy.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      console.log("Copied: " + textToCopy.value);
+    },
+    //Share chart image
+    shareChart: function(platform) {
+      if(platform == 'twitter'){
+        var shareText = $('#chartUrlString').val();
+        var shareURL = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText);
+        window.open(shareURL, '_blank');
+        return;
+      }
+    },
     //Share
     share: function (platform) {
       if(platform == 'twitter'){
@@ -421,9 +444,10 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
           );
           var sizes = calcPieSize(charts.istituzioni.divId);
           var charsLength = recalcCharsLength(sizes.width);
+          var height = $('#'+charts.istituzioni.divId + '_container').height();
           chart
             .width(sizes.width)
-            .height(sizes.height)
+            .height(height)
             .cy(sizes.cy)
             .innerRadius(sizes.innerRadius)
             .radius(sizes.radius)
@@ -574,9 +598,10 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
             }
           );
           var sizes = calcPieSize(charts.settore.divId);
+          var height = $('#'+charts.settore.divId + '_container').height();
           chart
             .width(sizes.width)
-            .height(sizes.height)
+            .height(height)
             .cy(sizes.cy)
             .cap(10)
             .innerRadius(sizes.innerRadius)
@@ -684,9 +709,10 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
             var centered;
             function clicked(d) {
             }
+            var height = $('#'+charts.map.divId + '_container').height();
             chart
               .width(width)
-              .height(400)
+              .height(height)
               .dimension(mapDimension)
               .group(group)
               .projection(projection)
