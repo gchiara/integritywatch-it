@@ -199,16 +199,16 @@
       <div class="container-fluid footer-bar">
         <div class="row">
           <div class="footer-col col-12 col-sm-12 footer-counts">
-            <div class="count-box count-box-recipients">
+            <div class="count-box count-box-recipients count-box-long">
               <div class="filter-count lgnb">0</div> su <strong class="total-count">0</strong> DESTINATARI
             </div>
-            <div class="dc-data-count count-box count-box-donazioni">
+            <div class="dc-data-count count-box count-box-donazioni count-box-long">
               <div class="filter-count">0</div>su <strong class="total-count">0</strong> DONAZIONI
             </div>
-            <div class="count-box count-box-donors">
+            <div class="count-box count-box-donors count-box-long">
               <div class="filter-count aznb">0</div> su <strong class="total-count">0</strong> DONATORI
             </div>
-            <div class="count-box count-box-amount count-box-importo">
+            <div class="count-box count-box-amount count-box-importo count-box-long">
               <div class="filter-count amountnb">0</div> su <strong class="total-count">0</strong> IMPORTO
             </div>
             <div class="footer-input">

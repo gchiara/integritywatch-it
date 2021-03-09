@@ -328,7 +328,7 @@ var resizeGraphs = function() {
 //Add dots to thousands
 function adddots(x){
   if(parseInt(x)){
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return x.toString().replace(".",",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
   return x;
 }
@@ -393,11 +393,10 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
         d.amountNum = 0;
         if(d.donation_amount){
           var amountString = d.donation_amount;
-          amountString = amountString.replace(".", "");
-          amountString = amountString.replace(",", ".");
           amountString = amountString.replace(" €", "");
           amountString = amountString.replace("€ ", "");
           d.amountNum = parseFloat(amountString);
+          console.log(d.donation_amount + " - " + d.amountNum);
           totalDonations += d.amountNum;
         }
         //Get donor info if person id present
@@ -649,7 +648,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
         var width = recalcWidth(charts.affiliazioneAmt.divId);
         var charsLength = recalcCharsLength(width);
         chart
-          .width(width)
+          .width(width - 20)
           .height(500)
           .margins({top: 0, left: 0, right: 0, bottom: 20})
           .group(filteredGroup)
