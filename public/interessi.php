@@ -234,7 +234,7 @@
     <script type="text/javascript" src="vendor/js/topojson.v1.min.js"></script>
     <script type="text/javascript" src="vendor/js/reductio.min.js"></script>
     <script type="text/javascript" src="vendor/js/html2canvas.min.js"></script>
-    <script src="static/interessiPrivati.js"></script>
+    <script src="static/interessiPrivati.js?v=1"></script>
 
  
 </body>

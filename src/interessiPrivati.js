@@ -36,7 +36,7 @@ var vuedata = {
     istituzioni: {
       id: 'istituzioni',
       title: 'Istituzioni di appartenenza',
-      info: 'Ogni fetta del grafico a torta indica, per ogni interesse privato riscontrato, l’istituzione di appartenenza dei Parlamentari e membri del Governo.'
+      info: 'Ogni fetta del grafico a torta indica, per ogni istituzione di appartenenza, il numero di politici per cui sono stati riscontrati degli interessi privati.'
     },
     partiti: {
       id: 'partiti',
@@ -46,7 +46,7 @@ var vuedata = {
     fatturato: {
       id: 'fatturato',
       title: 'Fatturato',
-      info: 'Ogni barra del grafico rappresenta un intervallo di fatturato delle aziende in cui membri del Governo e/o del Parlamento hanno degli interessi. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sul loro ruolo nelle aziende selezionate.'
+      info: 'Ogni barra del grafico rappresenta, per intervallo di fatturato, il numero di aziende in cui Membri del Governo e/o del Parlamento hanno degli interessi. Cliccando su una singola barra, potrai visualizzare attraverso gli altri grafici informazioni più specifiche sulle aziende e sui ruoli ricoperti.'
     },
     settore: {
       id: 'settore',
@@ -527,26 +527,44 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
           var dimension = ndx.dimension(function (d) {
               return d.company_turnover_range;
           });
-          var group = dimension.group().reduceSum(function (d) {
-              return 1;
-          });
-          var filteredGroup = (function(source_group) {
-            return {
-              all: function() {
-                return source_group.top(20).filter(function(d) {
-                  return (d.value != 0);
-                });
+          var customGroup =  dimension.group().reduce(
+            function(p, d) { 
+              if(d.company_id_transparency in p.ids){
+                  p.ids[d.company_id_transparency]++;
               }
-            };
-          })(group);
+              else {
+                  p.ids[d.company_id_transparency] = 1;
+                  p.uniquecount++;
+              }
+              return p;
+            },
+            function (p, d) {
+              p.ids[d.company_id_transparency]--;
+              if(p.ids[d.company_id_transparency] === 0){
+                  delete p.ids[d.company_id_transparency];
+                  p.uniquecount--;
+              }
+              return p;
+            },
+            function () {
+              return {
+                uniquecount: 0,
+                ids: {}
+              };
+            }
+          );
           var width = recalcWidth(charts.fatturato.divId);
           var charsLength = recalcCharsLength(width);
           chart
             .width(width)
             .height(500)
             .margins({top: 0, left: 0, right: 0, bottom: 20})
-            .group(filteredGroup)
+            .group(customGroup)
             .dimension(dimension)
+            .valueAccessor(function(d){ console.log(d.value);return d.value.uniquecount; })
+            .ordering(function(b) {
+              return -b.value.uniquecount;
+            })
             .colorCalculator(function(d, i) {
               return vuedata.colors.default2;
             })
@@ -557,7 +575,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
                 return d.key;
             })
             .title(function (d) {
-                return d.key + ': ' + d.value;
+                return d.key + ': ' + d.value.uniquecount;
             })
             .elasticX(true)
             .xAxis().ticks(4);
@@ -570,7 +588,6 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
           var dimension = ndx.dimension(function (d) {
             return d.company_transparency_sector; 
           });
-          var group = dimension.group().reduceSum(function (d) { return 1; });
           var customGroup =  dimension.group().reduce(
             function(p, d) { 
               if(d.company_id_transparency in p.ids){
@@ -661,7 +678,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
           var filteredGroup = (function(source_group) {
             return {
               all: function() {
-                return source_group.top(20).filter(function(d) {
+                return source_group.top(30).filter(function(d) {
                   return (d.value != 0);
                 });
               }
@@ -671,7 +688,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
           var charsLength = recalcCharsLength(width);
           chart
             .width(width)
-            .height(500)
+            .height(530)
             .margins({top: 0, left: 0, right: 0, bottom: 20})
             .group(filteredGroup)
             .dimension(dimension)
@@ -700,7 +717,32 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
             var mapDimension = ndx.dimension(function (d) {
               return d.regionCode;
             });
-            var group = mapDimension.group().reduceSum(function (d) { return 1; });
+            var customGroup =  mapDimension.group().reduce(
+              function(p, d) { 
+                if(d.company_id_transparency in p.ids){
+                    p.ids[d.company_id_transparency]++;
+                }
+                else {
+                    p.ids[d.company_id_transparency] = 1;
+                    p.uniquecount++;
+                }
+                return p;
+              },
+              function (p, d) {
+                p.ids[d.company_id_transparency]--;
+                if(p.ids[d.company_id_transparency] === 0){
+                    delete p.ids[d.company_id_transparency];
+                    p.uniquecount--;
+                }
+                return p;
+              },
+              function () {
+                return {
+                  uniquecount: 0,
+                  ids: {}
+                };
+              }
+            );
             var dpt = topojson.feature(jsonmap, jsonmap.objects.regions).features;
             var projection = d3.geoMercator()
               .center([11,45])
@@ -714,7 +756,8 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
               .width(width)
               .height(height)
               .dimension(mapDimension)
-              .group(group)
+              .group(customGroup)
+              .valueAccessor(function(d){ console.log(d.value);return d.value.uniquecount; })
               .projection(projection)
               .colors(d3.scaleQuantize().range(["#b9efea", "#6be5db", "#44dfd2", "#19d3c5", "#16baad", "#13a195", "#10877d", "#0d6e66"]))
               //.colors(d3.scaleQuantize().range(["#dae6ff", "#b3cbff", "#89adfa", "#7b9be0", "#6d8ac7", "#5f78ad", "#516694", "#43557a", "#354361"]))
@@ -722,7 +765,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
               .colorCalculator(function (d) { return (!d || d == 0) ? '#eee' : chart.colors()(d);})
               .overlayGeoJson(dpt, "region", function (d) { return d.properties.reg_istat_code_num.toString(); })
               .title(function (d) {
-                return  _.find(dpt, function (m) {return m.properties.reg_istat_code_num==d.key}).properties.reg_name + ': ' + d.value + ' interessi';
+                return  _.find(dpt, function (m) {return m.properties.reg_istat_code_num==d.key}).properties.reg_name + ': ' + d.value + ' aziende';
               })
               .on('renderlet', function(chart) {});
             chart.render();

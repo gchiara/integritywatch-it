@@ -236,7 +236,7 @@
     <script type="text/javascript" src="vendor/js/dc.js"></script>
     <script type="text/javascript" src="vendor/js/dc.cloud.js"></script>
     <script type="text/javascript" src="vendor/js/html2canvas.min.js"></script>
-    <script src="static/donazioni.js"></script>
+    <script src="static/donazioni.js?v=1"></script>
  
 </body>
 </html>

@@ -446,7 +446,9 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
         var dimension = ndx.dimension(function (d) {
           return d.recipient_type; 
         });
-        var group = dimension.group().reduceSum(function (d) { return 1; });
+        var group = dimension.group().reduceSum(function (d) { 
+          return d.amountNum;
+        });
         var sizes = calcPieSize(charts.tipoRicevente.divId);
         var height = $('#'+charts.tipoDonatore.divId + '_container').height();
         chart
@@ -464,7 +466,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
           }))
           .title(function(d){
             var thisKey = d.key;
-            return thisKey + ': ' + d.value;
+            return thisKey + ': € ' + d.value.toFixed(2);
           })
           .dimension(dimension)
           .colorCalculator(function(d, i) {
@@ -589,7 +591,9 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
         var dimension = ndx.dimension(function (d) {
           return d.donor_type; 
         });
-        var group = dimension.group().reduceSum(function (d) { return 1; });
+        var group = dimension.group().reduceSum(function (d) { 
+          return d.amountNum; 
+        });
         var sizes = calcPieSize(charts.tipoDonatore.divId);
         var height = $('#'+charts.tipoDonatore.divId + '_container').height();
         console.log(height);
@@ -609,7 +613,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
           }))
           .title(function(d){
             var thisKey = d.key;
-            return thisKey + ': ' + d.value;
+            return thisKey + ': € ' + d.value.toFixed(2);
           })
           .dimension(dimension)
           .colorCalculator(function(d, i) {
@@ -914,16 +918,17 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
       //Custom counters
       function drawDonorsCounter() {
         var dim = ndx.dimension (function(d) {
-          if (!d.donor_last_name_01) {
+          if (!d.donor_id_transparency) {
             return "";
           } else {
-            return d.donor_last_name_01 + ' ' + d.donor_name_01;
+            //return d.donor_last_name_01 + ' ' + d.donor_name_01;
+            return d.donor_id_transparency;
           }
         });
         var group = dim.group().reduce(
           function(p,d) {  
             p.nb +=1;
-            if (!d.donor_last_name_01) {
+            if (!d.donor_id_transparency) {
               return p;
             }
             p.amount += +d.amountNum;
@@ -931,7 +936,7 @@ csv('./data/interessi-privati.csv?' + randomPar, (err, interessi) => {
           },
           function(p,d) {  
             p.nb -=1;
-            if (!d.donor_last_name_01) {
+            if (!d.donor_id_transparency) {
               return p;
             }
             p.amount -= +d.amountNum;
