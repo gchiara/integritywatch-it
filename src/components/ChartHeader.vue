@@ -102,6 +102,7 @@ $color_TI: #205d85;
   }
   .chart-header-buttons {
     text-align: right;
+    padding-left: 0;
     .btn-info {
       height: 23px;
       width: 23px;
@@ -113,6 +114,11 @@ $color_TI: #205d85;
       font-size: 14px;
       background: $color_TI;
       border: none;
+      @media only screen and (max-width: 1490px) and (min-width: 769px)  {
+        height: 18px;
+        width: 18px;
+        font-size: 12px;
+      }
     }
     .btn-download-chart {
       height: 23px;
@@ -126,6 +132,15 @@ $color_TI: #205d85;
       text-align: center;
       i {
         font-size: 19px;
+      }
+      @media only screen and (max-width: 1490px) and (min-width: 769px)  {
+        height: 18px;
+        width: 18px;
+        i {
+          font-size: 13px;
+          position: relative;
+          top: -4px;
+        }
       }
     }
   }

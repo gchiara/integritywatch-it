@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <?php include 'gtag.php' ?>
@@ -16,7 +17,7 @@
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600,700|Barlow+Semi+Condensed:400,700|Roboto:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/interessiPrivati.css">
+    <link rel="stylesheet" href="static/interessiPrivati.css?v=3">
     <!-- temporary fix for table arrows path -->
     <style>
       table.dataTable thead .sorting {
@@ -48,12 +49,18 @@
               <div class="col-md-8 chart-col" v-if="showInfo">
                 <div class="boxed-container description-container">
                   <h1>SOLDI E POLITICA – INTERESSI PRIVATI</h1>
-                  <p>Una panoramica sulle partecipazioni e i ruoli in aziende assunti da membri del Governo e del Parlamento italiano a partire dalla XVIII legislatura.</p> 
-                  <p>Con un semplice click sui grafici è possibile classificare, ordinare e filtrare tutte le informazioni.</p>
+                  <p>Una panoramica sulle partecipazioni e i ruoli in aziende assunti da membri del Governo e del Parlamento italiano a partire dalla XVIII legislatura.</p>
+                  <p>Il numero totale dei politici riportato in basso comprende quelli che risultano avere i ruoli o partecipazioni nelle aziende private.</p>
+                  <p>Con un semplice clic sui grafici è possibile classificare, ordinare e filtrare tutte le informazioni relative alla Legislatura XIX (in corso) e alla Legislatura XVIII.</p>
                   <i class="material-icons close-btn" @click="showInfo = false">close</i>
                 </div>
               </div>
             </div>
+          </div>
+          <!-- LEGISLATURE BUTTONS -->
+          <div class="col-md-12 legislature-buttons-container">
+            <a href="./interessi.php?legislature=XIX" :class="{active: legislature == 'XIX'}">XIX Legislatura</a>
+            <a href="./interessi.php?legislature=XVIII" :class="{active: legislature == 'XVIII'}">XVIII Legislatura</a>
           </div>
           <!-- CHARTS - FIRST ROW - LEFT -->
           <div class="col-md-6 chart-subrow">
@@ -84,7 +91,8 @@
           <!-- CHARTS - FIRST ROW - RIGHT -->
           <div class="col-md-6 chart-subrow">
             <div class="row chart-subrow-row">
-              <div class="col-md-12 subrow-title-container subrow-title-container-right">
+              <!-- <div class="col-md-12 subrow-title-container subrow-title-container-right"> -->
+              <div class="col-md-12 subrow-title-container">
                 <div class="subrow-title subrow-title-right">AZIENDE</div>
               </div>
               <div class="col-md-6 chart-col">
@@ -130,6 +138,8 @@
               </div>
             </div>
           </div>
+          <div class="last-data-string" v-if="legislature == 'XIX'">Dati aggiornati al 10/05/2023</div>
+          <div class="last-data-string" v-if="legislature == 'XVIII'">Dati aggiornati al 31/12/2020</div>
         </div>
       </div>
       <!-- DETAILS MODAL -->
@@ -234,7 +244,7 @@
     <script type="text/javascript" src="vendor/js/topojson.v1.min.js"></script>
     <script type="text/javascript" src="vendor/js/reductio.min.js"></script>
     <script type="text/javascript" src="vendor/js/html2canvas.min.js"></script>
-    <script src="static/interessiPrivati.js?v=1"></script>
+    <script src="static/interessiPrivati.js?v=3"></script>
 
  
 </body>

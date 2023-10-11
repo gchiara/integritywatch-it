@@ -978,3 +978,32 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
     margin-bottom: 30px;
   }
 }
+
+.legislature-buttons-container {
+  text-align: left;
+  a {
+    background: #aaa;
+    color: #fff;
+    padding: 5px 20px 5px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-decoration: none;
+    &.active, &:hover {
+      background: #00a7e1;
+    }
+  }
+}
+
+/* DC legend vertical alignment fix */
+.dc-legend{
+  .dc-legend-item {
+    rect  {
+      y: -5px !important;
+    }
+    @supports (-moz-appearance:none) {
+      rect  {
+        y: 0px !important;
+      }
+    }
+  }
+}

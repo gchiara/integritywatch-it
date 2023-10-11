@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <?php include 'gtag.php' ?>
@@ -16,7 +17,7 @@
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600,700|Barlow+Semi+Condensed:400,700|Roboto:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/donazioni.css">
+    <link rel="stylesheet" href="static/donazioni.css?v=3">
     <!-- temporary fix for table arrows path -->
     <style>
       table.dataTable thead .sorting {
@@ -129,7 +130,7 @@
               </div>
             </div>
           </div>
-          <div class="last-data-string">Dati aggiornati al 31/12/2019</div>
+          <div class="last-data-string">Dati aggiornati al 31/12/2020</div>
         </div>
       </div>
       <!-- DETAILS MODAL -->
@@ -236,7 +237,7 @@
     <script type="text/javascript" src="vendor/js/dc.js"></script>
     <script type="text/javascript" src="vendor/js/dc.cloud.js"></script>
     <script type="text/javascript" src="vendor/js/html2canvas.min.js"></script>
-    <script src="static/donazioni.js?v=1"></script>
+    <script src="static/donazioni.js?v=3"></script>
  
 </body>
 </html>
