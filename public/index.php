@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Finanziamenti Politici | Soldi e Politica</title>
+    <title>Finanziamento della politica | Soldi e Politica</title>
     <!-- Add twitter and og meta here -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Soldi e Politica | Finanziamenti Politici" />
+    <meta property="og:title" content="Soldi e Politica | Finanziamento della politica" />
     <meta property="og:description" content="Una panoramica unica sui contributi ricevuti dai partiti e movimenti politici nazionali e dai membri del Parlamento e del Governo." />
     <meta property="og:image" content="https://www.transparency.it/soldiepolitica/images/preview.png" />
     <meta property="og:image:type" content="image/png" />
@@ -17,7 +17,7 @@
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600,700|Barlow+Semi+Condensed:400,700|Roboto:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/donazioni.css?v=3">
+    <link rel="stylesheet" href="static/donazioni.css?v=4">
     <!-- temporary fix for table arrows path -->
     <style>
       table.dataTable thead .sorting {
@@ -48,7 +48,7 @@
               <!-- INFO -->
               <div class="col-md-8 chart-col" v-if="showInfo">
                 <div class="boxed-container description-container">
-                  <h1>SOLDI E POLITICA – FINANZIAMENTI POLITICI</h1>
+                  <h1>SOLDI E POLITICA – FINANZIAMENTO DELLA POLITICA</h1>
                   <p>Una panoramica unica sui contributi ricevuti dai partiti e movimenti politici nazionali e dai membri del Parlamento e del Governo.</p> 
                   <p>Con un semplice click sui grafici, è possibile classificare, ordinare e filtrare tutte le informazioni.</p>
                   <i class="material-icons close-btn" @click="showInfo = false">close</i>
@@ -130,7 +130,7 @@
               </div>
             </div>
           </div>
-          <div class="last-data-string">Dati aggiornati al 31/12/2020</div>
+          <div class="last-data-string">Dati aggiornati al 31/12/2022</div>
         </div>
       </div>
       <!-- DETAILS MODAL -->
@@ -237,7 +237,7 @@
     <script type="text/javascript" src="vendor/js/dc.js"></script>
     <script type="text/javascript" src="vendor/js/dc.cloud.js"></script>
     <script type="text/javascript" src="vendor/js/html2canvas.min.js"></script>
-    <script src="static/donazioni.js?v=3"></script>
+    <script src="static/donazioni.js?v=4"></script>
  
 </body>
 </html>

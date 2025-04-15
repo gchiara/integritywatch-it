@@ -351,8 +351,8 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
 //Custom italian currency order for dataTables
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
   "currency-pre": function ( a ) {
-      a = a.replace( ".", "" );
-      a = a.replace( ",", "." );
+      //a = a.replace( ".", "" );
+      a = a.replace( ",", "" );
       a = a.replace( " €", "" );
       return parseFloat( a );
   },
@@ -392,10 +392,16 @@ csv('./data/persone_old.csv?' + randomPar, (err, persone) => {
       if(d.donation_range == '5000,01-10000,00') {
         d.donation_range = '5.000,01-10.000,00';
       }
+      /*
+      var dranges = ["0-499,99", "500,00-5.000,00", "5.000,01-10.000,00", "10.000,01-50.000,00", "50.000,01-100.000,00", ">100.000,01"];
+      if(dranges.indexOf(d.donation_range) == -1) {
+        console.log(d.donation_range);
+      }
+      */
       d.amountNum = 0;
       if(d.donation_amount){
         var amountString = d.donation_amount;
-        amountString = amountString.replace(" €", "").replace("€ ", "").replace(",", "");
+        amountString = amountString.replace(" €", "").replace("€ ", "").replaceAll(",", "");
         d.amountNum = parseFloat(amountString);
         //console.log(d.donation_amount + " - " + d.amountNum);
         totalDonations += d.amountNum;

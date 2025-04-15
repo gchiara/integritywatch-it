@@ -139,7 +139,7 @@
             </div>
           </div>
           <div class="last-data-string" v-if="legislature == 'XIX'">Dati aggiornati al 10/05/2023</div>
-          <div class="last-data-string" v-if="legislature == 'XVIII'">Dati aggiornati al 31/12/2020</div>
+          <div class="last-data-string" v-if="legislature == 'XVIII'">Dati aggiornati al 31/12/2022</div>
         </div>
       </div>
       <!-- DETAILS MODAL -->

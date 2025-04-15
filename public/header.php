@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto ml-auto">
       <li class="nav-item">
-        <a href="./" class="nav-link" :class="{active: page == 'tabC'}">Finanziamento Politico</a>
+        <a href="./" class="nav-link" :class="{active: page == 'tabC'}">Finanziamento della politica</a>
       </li>
       <li class="nav-item">
         <a href="./interessi.php" class="nav-link" :class="{active: page == 'tabB'}">Interessi Privati</a>
